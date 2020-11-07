@@ -18,4 +18,8 @@ Assuming you have conda installed:
 
 # Trello: https://trello.com/b/Oitxg7vr/web-programming-group-project
 
+Superuser: 
+username: user
+password: user
+
 
