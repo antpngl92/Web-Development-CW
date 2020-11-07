@@ -71,6 +71,10 @@ TEMPLATES = [
     },
 ]
 
+# Overrides the default behaviour that is build in with Django 
+# instead authenticate users using this custom user model called Account from account app
+AUTH_USER_MODEL = 'account.Account'
+
 WSGI_APPLICATION = 'newspaper.wsgi.application'
 
 
