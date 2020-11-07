@@ -15,3 +15,7 @@ Assuming you have conda installed:
 5) CD into the project folder and type python manage.py runserver to run the project
 
 
+
+# Trello: https://trello.com/b/Oitxg7vr/web-programming-group-project
+
+
