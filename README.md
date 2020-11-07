@@ -20,6 +20,7 @@ Assuming you have conda installed:
 
 Superuser: 
 username: user
+
 password: user
 
 
