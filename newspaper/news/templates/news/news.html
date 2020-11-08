@@ -2,29 +2,23 @@
 
 
 {% block content %}
-
-
-
-{% for n in news%}
-<div class="album py-5 bg-light">
-    <div class="container">
-        <div class="card text-center mb-4">
-            <div class="card-header">
-                {{n.category}}
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">{{n.title}}</h5>
-                <p class="card-text">{{n.content}}</p>
-                <a href="#" class="btn btn-primary">Like</a>
-            </div>
-            <div class="card-footer text-muted">
-                {{n.date}}
+    {% for n in news %}
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <div class="card text-center mb-4">
+                <div class="card-header">
+                    {{n.category}}
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{n.title}}</h5>
+                    <p class="card-text">{{n.content}}</p>
+                    <a href="#" class="btn btn-primary">Like</a>
+                </div>
+                <div class="card-footer text-muted">
+                    {{n.date}}
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-
-{%endfor%}
-
+    {% endfor %}
 {% endblock %}

@@ -36,7 +36,7 @@ class MyAccountManager(BaseUserManager):
 class Account(AbstractBaseUser):
     username = models.CharField(verbose_name='username', max_length=20, unique=True)
     email = models.EmailField(verbose_name='email', max_length=60, unique=True)
-    dob = models.DateField(verbose_name='date of birth')
+    dob = models.DateField(verbose_name='date of birth', null=True)
     favourite = models.ManyToManyField(News)
 
     # The fields bellow are REQUIRED for AbstractBaseUser class (for custom user model)
@@ -50,7 +50,7 @@ class Account(AbstractBaseUser):
     # Whatever you wante to be able to log in, use this
     USERNAME_FIELD = 'username'
 
-    REQUIRED_FIELDS = ['email', 'dob']
+    REQUIRED_FIELDS = ['email']
 
     # Tell this account model where the Manager is
     objects = MyAccountManager()
