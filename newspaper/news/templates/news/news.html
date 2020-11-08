@@ -2,23 +2,20 @@
 
 
 {% block content %}
-    {% for n in news %}
-    <div class="album py-5 bg-light">
-        <div class="container">
-            <div class="card text-center mb-4">
-                <div class="card-header">
-                    {{n.category}}
-                </div>
-                <div class="card-body">
-                    <h5 class="card-title">{{n.title}}</h5>
-                    <p class="card-text">{{n.content}}</p>
-                    <a href="#" class="btn btn-primary">Like</a>
-                </div>
-                <div class="card-footer text-muted">
-                    {{n.date}}
-                </div>
+{% for category in categories%}
+<h1>{{category}}</h1>
+    
+    
+    {% for news in category.get_news %}
+        
+    <div class="jumbotron jumbotron-fluid"></div>  
+    <div class="container"></div>
+    
+                <h1 class="display-4">{{ news.title}}</h1>
+                <p class="lead">{{news.content}}</p>
             </div>
         </div>
-    </div>
     {% endfor %}
+    
+  {% endfor %}
 {% endblock %}
