@@ -8,7 +8,8 @@ class News(models.Model):
     category = models.ForeignKey('Category', null=True, blank=True,on_delete=models.DO_NOTHING )
     image = models.ImageField(null=True, blank=True, upload_to="gallery")
 
-    
+    class Meta:
+        ordering = ['-date']
 
     def __str__(self):
         return self.title
@@ -37,6 +38,7 @@ class Category(models.Model):
         # __str__ if you are using python 2
         unique_together = ('slug', 'parent',)    
         verbose_name_plural = "categories"     
+        ordering = ['-name']
     
     def get_news(self):
         return News.objects.filter(category=self)
