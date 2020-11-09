@@ -2,17 +2,18 @@
 
 
 {% block content %}
-
+<div class="row mt-5"></div>
   {% for category in categories%}
-  <h1>{{category}}</h1>
+  <div class="jumbotron pt-2">
+  <h3 class="text-center">{{category}}</h3><hr>
 
-  <div class="row">
+  <div class="row mt-5">
     
   {% for news in category.get_news %}
     <div class="col-md-4 max">
       <div class="card mb-4 box-shadow">
         <img class="card-img-top" height="200" width="200" src={{news.image.url}} alt="Card image cap">
-        <div class="card-body" style="height: 260px;">
+        <div class="card-body" style="height: 290px;">
           <h5 class="card-text">{{ news.title}}</h5>
           <p class="card-text">{{news.content  | slice:":150"}} ...</p>
           <div class="d-flex justify-content-between align-items-center">
@@ -26,6 +27,7 @@
       </div>
     </div>
   {% endfor %}
+</div>
 </div>
   {% endfor %}
 
