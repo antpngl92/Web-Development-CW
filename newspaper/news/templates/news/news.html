@@ -4,18 +4,15 @@
 {% block content %}
 {% for category in categories%}
 <h1>{{category}}</h1>
-    
-    
-    {% for news in category.get_news %}
-        
-    <div class="jumbotron jumbotron-fluid"></div>  
-    <div class="container"></div>
-    
-                <h1 class="display-4">{{ news.title}}</h1>
-                <p class="lead">{{news.content}}</p>
-            </div>
-        </div>
-    {% endfor %}
-    
-  {% endfor %}
+
+{% for news in category.get_news %}
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">{{ news.title}}</h1>
+    <p class="lead">{{news.content}}</p>
+  </div>
+</div>
+{% endfor %}
+
+{% endfor %}
 {% endblock %}
