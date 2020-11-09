@@ -6,7 +6,7 @@ class News(models.Model):
     content = models.TextField(max_length=10000)
     date = models.DateField()
     category = models.ForeignKey('Category', null=True, blank=True,on_delete=models.DO_NOTHING )
-    image = models.ImageField(null=True, blank=True)
+    image = models.ImageField(null=True, blank=True, upload_to="gallery")
 
     
 

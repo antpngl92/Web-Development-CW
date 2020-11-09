@@ -2,17 +2,31 @@
 
 
 {% block content %}
-{% for category in categories%}
-<h1>{{category}}</h1>
 
-{% for news in category.get_news %}
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">{{ news.title}}</h1>
-    <p class="lead">{{news.content}}</p>
-  </div>
+  {% for category in categories%}
+  <h1>{{category}}</h1>
+
+  <div class="row">
+    
+  {% for news in category.get_news %}
+    <div class="col-md-4">
+      <div class="card mb-4 box-shadow">
+        <img class="card-img-top" height="200" width="200" src={{news.image.url}} alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-text">{{ news.title}}</h5>
+          <p class="card-text">{{news.content  | slice:":250"}} ...</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <button type="button" class="btn btn-sm btn-outline-secondary">Like</button>
+              <button type="button" class="btn btn-sm btn-outline-secondary">View Full Article</button>
+            </div>
+            <small class="text-muted">{{news.date}}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
 </div>
-{% endfor %}
+  {% endfor %}
 
-{% endfor %}
 {% endblock %}
