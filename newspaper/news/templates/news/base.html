@@ -18,11 +18,27 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'news_home' %}">Home</a>
+            <a class="nav-link" href="{% url 'news_home' %}">HOME</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'news_home' %}">NEWS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'news_home' %}">COVID-19 ADVICE</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'news_home' %}">UK POLITICS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'news_home' %}">US POLITICS</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'news_home' %}">PREMIUM</a>
           </li>
           {% if request.user.is_authenticated %}
+          <!-- To be moved in the "Username" drop down next to profile picture -->
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'logout'  %}">Logout</a>
+              <a class="nav-link" href="{% url 'logout'  %}">Logout</a> 
             </li>
           {% else %}
           <a class="nav-link" href="{% url 'register'  %}">Register</a>
@@ -34,6 +50,7 @@
         <table class="navbar-nav">
           <tr>
             <td>
+              <!-- This should be a dropdown -->
               <a class="nav-link p-0 pr-3" href="#">{{user.username  | capfirst}}</a>
             </td>
             <td>
