@@ -12,7 +12,7 @@
 </head>
 <body>
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
-  <div class='container'>
+
     <!--Navbar -->
     <nav class="mb-1 navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
@@ -40,9 +40,6 @@
             <li class="nav-item">
               <a class="nav-link" href="{% url 'logout'  %}">Logout</a> 
             </li>
-          {% else %}
-          <a class="nav-link" href="{% url 'register'  %}">Register</a>
-          <a class="nav-link" href="{% url 'login'  %}">Login</a>
           {% endif %}
         </ul>
 
@@ -59,12 +56,16 @@
           </tr>
         </table>
         {% else %}
+        <div class="navbar-nav">
+          <a class="nav-link" href="{% url 'register'  %}">Register</a>
+          <a class="nav-link" href="{% url 'login'  %}">Login</a>
+        </div>
         {%endif%}
         
       </div>
     </nav>
     <!--/.Navbar -->
-
+    <div class='container'>
     {% block content %}
     {% endblock %}
 
