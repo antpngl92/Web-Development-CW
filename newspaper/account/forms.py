@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate
 class RegistrationForm(UserCreationForm):
     username = forms.CharField(max_length=20, help_text='Required. Add username')
     email = forms.EmailField(max_length=60, help_text='Required. Add a valid email address')
-    dob = forms.DateField(help_text='Required. Add your date of birth',widget=forms.TextInput(attrs={'placeholder': 'YYYY-MM-DD'}))
+    dob = forms.DateField(help_text='Required. Add your date of birth',widget=forms.TextInput(attrs={'placeholder': 'YYYY-MM-DD'}), label='Date of Birth')
 
 
     class Meta:
