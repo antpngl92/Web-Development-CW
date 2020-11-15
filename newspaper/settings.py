@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'vgs^_7j5^g@n-k1@ne#wo(bzi81i)6hnl24tk)r-k7uoq5d_$g'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','localhost','.apps.okd.eecs.qmul.ac.uk']
 ALLOWED_CIDR_NETS = ['10.128.0.0/14']
