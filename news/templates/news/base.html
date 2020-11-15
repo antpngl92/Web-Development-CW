@@ -51,7 +51,11 @@
               <a class="nav-link p-0 pr-3" href="#">{{user.username  | capfirst}}</a>
             </td>
             <td>
+              {% if user.profile_picture %}
               <img src="{{user.profile_picture.url}}" alt="avatar image" height="35" style="border-radius: 60%;"></div>
+              {% else %} 
+              <img src="https://e7.pngegg.com/pngimages/833/38/png-clipart-user-profile-computer-software-internet-bot-user-miscellaneous-service.png" alt="avatar image" height="35" style="border-radius: 60%;"></div>
+              {% endif %}
             </td>
           </tr>
         </table>
