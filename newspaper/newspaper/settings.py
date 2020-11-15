@@ -26,7 +26,8 @@ SECRET_KEY = 'vgs^_7j5^g@n-k1@ne#wo(bzi81i)6hnl24tk)r-k7uoq5d_$g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','localhost','.apps.okd.eecs.qmul.ac.uk']
+ALLOWED_CIDR_NETS = ['10.128.0.0/14']
 
 
 # Application definition
@@ -52,7 +53,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'allow_cidr.middleware.AllowCIDRMiddleware',
 ]
+
 
 ROOT_URLCONF = 'newspaper.urls'
 
@@ -130,3 +134,5 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
