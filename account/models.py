@@ -49,7 +49,7 @@ class Account(AbstractBaseUser):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
-    # Whatever you wante to be able to log in, use this
+    # Whatever you want to be able to log in, use this
     USERNAME_FIELD = 'username'
 
     REQUIRED_FIELDS = ['email']
