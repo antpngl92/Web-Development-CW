@@ -10,7 +10,7 @@ class MyAccountManager(BaseUserManager):
             raise ValueError("You must provide email address!")
         if not dob:
             raise ValueError("You must provide your date of birth!")
-        
+
         user = self.model(
             username=username,
             email = self.normalize_email(email),
@@ -38,7 +38,7 @@ class Account(AbstractBaseUser):
     email = models.EmailField(verbose_name='email', max_length=60, unique=True)
     dob = models.DateField(verbose_name='date of birth', null=True)
     favourite = models.ManyToManyField(Category)
-    like = models.ManyToManyField(News)
+    likes = models.ManyToManyField(News, related_name="users")
     profile_picture = models.ImageField()
 
     # The fields bellow are REQUIRED for AbstractBaseUser class (for custom user model)

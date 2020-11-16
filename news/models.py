@@ -7,7 +7,7 @@ class News(models.Model):
     date = models.DateField()
     category = models.ForeignKey('Category', null=True, blank=True,on_delete=models.DO_NOTHING )
     image = models.ImageField(null=True, blank=True, upload_to="gallery")
-
+    likes = models.IntegerField(default=0)
     class Meta:
         ordering = ['-date']
 
@@ -16,7 +16,7 @@ class News(models.Model):
 
     def get_cat_list(self):
         k = self.category
-        
+
         breadcrumb = ["dummy"]
         while k is not None:
             breadcrumb.append(k.slug)
@@ -36,15 +36,15 @@ class Category(models.Model):
         #enforcing that there can not be two categories under a parent with same slug
         # __str__ method elaborated later in post.  use __unicode__ in place of
         # __str__ if you are using python 2
-        unique_together = ('slug', 'parent',)    
-        verbose_name_plural = "categories"     
+        unique_together = ('slug', 'parent',)
+        verbose_name_plural = "categories"
         ordering = ['-name']
-    
+
     def get_news(self):
         return News.objects.filter(category=self)
 
-    def __str__(self):                           
-        full_path = [self.name]                  
+    def __str__(self):
+        full_path = [self.name]
         k = self.parent
         while k is not None:
             full_path.append(k.name)
