@@ -11,9 +11,6 @@ from account.models import Account
 # Create your views here.
 def home(request):
     context = {}
-    
-    
-
     if not request.user.is_authenticated:
         news = News.objects.all()
         categories = Category.objects.all()
