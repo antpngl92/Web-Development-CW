@@ -26,4 +26,31 @@ class AccountAuthenticationForm(forms.ModelForm):
         password = self.cleaned_data['password']
         if not authenticate(username=username, password=password):
             raise forms.ValidationError('Invalid login')
-        
+
+
+class AccountUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Account
+        fields = ('username', 'email', 'dob', 'favourite', 'profile_picture')
+
+
+    # Make sure that the username and email that user try to change to is not already registered in the DataBase
+    def clean_username(self):
+        if self.is_valid():
+            username = self.cleaned_data['username']
+            
+            try:
+                account = Account.objects.exclude(pk=self.instance.pk).get(username=username)
+            except Account.DoesNotExist:
+                return username
+            raise forms.ValidationError(f"Username: {account.username} is already in use.")
+    
+    def clean_email(self):
+        if self.is_valid():
+            email = self.cleaned_data['email']
+            
+            try:
+                account = Account.objects.exclude(pk=self.instance.pk).get(email=email)
+            except Account.DoesNotExist:
+                return email
+            raise forms.ValidationError(f"Email: {account.email} is already in use.")
