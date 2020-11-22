@@ -31,7 +31,7 @@ class AccountAuthenticationForm(forms.ModelForm):
 class AccountUpdateForm(forms.ModelForm):
     class Meta:
         model = Account
-        fields = ('username', 'email', 'dob', 'favourite', 'profile_picture')
+        fields = ('username', 'email', 'dob', 'favourite')
 
 
     # Make sure that the username and email that user try to change to is not already registered in the DataBase

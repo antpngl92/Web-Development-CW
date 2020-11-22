@@ -70,7 +70,7 @@ def account_view(request):
                 'username' : request.user.username,
                 'email' : request.user.email,
                 'dob' : request.user.dob,
-                # 'favourite' : request.user.favourite, // This should be made with AJAx
+                # 'favourite' : request.user.favourite, 
                 'profile_picture' : request.user.profile_picture
             }
         )

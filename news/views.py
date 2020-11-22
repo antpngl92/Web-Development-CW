@@ -6,15 +6,25 @@ from .models import News, Category
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 from django.http import QueryDict, JsonResponse, HttpResponse
+from account.models import Account
 
 # Create your views here.
 def home(request):
-    news = News.objects.all()
-    categories = Category.objects.all()
-    for article in news:
-        article.likes = article.users.all().count()
-        article.save()
-    context = {'news':news, 'categories':categories,'title': 'News'}
+    context = {}
+    
+    
+
+    if not request.user.is_authenticated:
+        news = News.objects.all()
+        categories = Category.objects.all()
+        for article in news:
+            article.likes = article.users.all().count()
+            article.save()
+        context = {'news':news, 'categories':categories,'title': 'News'}
+    else:
+        user_favourite_cat = request.user.favourite.all()
+        news = News.objects.filter(category=user_favourite_cat)
+        context = {'news':news, 'categories':user_favourite_cat,'title': 'News'}
     return render(request, 'news/news.html', context)
 
 @csrf_exempt
