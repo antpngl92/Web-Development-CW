@@ -11,64 +11,10 @@
   <title>{{ title }}</title>
 </head>
 <body>
+  {% include 'news/navbar.html' %}
   <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
   <script type="text/javascript" src="{% static 'front/article.js' %}"></script>
-    <!--Navbar -->
-    <nav class="mb-1 navbar navbar-expand-lg navbar-dark bg-dark">
-      <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'news_home' %}">HOME</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'news_home' %}">NEWS</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'news_home' %}">COVID-19 ADVICE</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'news_home' %}">UK POLITICS</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'news_home' %}">US POLITICS</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'news_home' %}">PREMIUM</a>
-          </li>
-        </ul>
-
-        {% if request.user.is_authenticated %}
-        <table class="navbar-nav">
-          <tr>
-            <td class="nav-item dropdown">
-              <!-- This should be a dropdown -->
-              <a class="nav-link p-0 pr-3 nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{user.username  | capfirst}}</a>
-              <div class="dropdown-menu" style="left: -100px !important;">
-                <a href="{% url 'account' %}" class="dropdown-item">Account</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="{% url 'logout'  %}">Logout</a>
-            </div>
-            </td>
-            <td>
-              <!-- This should be a dropdown -->
-              {% if user.profile_picture %}
-              <img src="{{user.profile_picture.url}}" alt="avatar image" height="35" style="border-radius: 60%;"></div>
-              {% else %}
-              <img src="https://e7.pngegg.com/pngimages/833/38/png-clipart-user-profile-computer-software-internet-bot-user-miscellaneous-service.png" alt="avatar image" height="35" style="border-radius: 60%;"></div>
-              {% endif %}
-            </td>
-          </tr>
-        </table>
-        {% else %}
-        <div class="navbar-nav">
-          <a class="nav-link" href="{% url 'register'  %}">Register</a>
-          <a class="nav-link" href="{% url 'login'  %}">Login</a>
-        </div>
-        {%endif%}
-
-      </div>
-    </nav>
-    <!--/.Navbar -->
+  
     <div class='container'>
     {% block content %}
     {% endblock %}
@@ -83,5 +29,4 @@
       crossorigin="anonymous"></script>
   </div>
 </body>
-
 </html>
