@@ -8,22 +8,13 @@
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a class="nav-link" href="{% url 'news_home' %}">HOME</a>
-        </li>
+      </li>
+      {% for cat in categories%}
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'news_home' %}">NEWS</a>
+          <a class="nav-link" href="#">{{cat.name | upper }}</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'news_home' %}">COVID-19 ADVICE</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'news_home' %}">UK POLITICS</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'news_home' %}">US POLITICS</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'news_home' %}">PREMIUM</a>
-        </li>
+  
+      {% endfor %}
       </ul>
       <!--END LEFT SIDE NAVBAR -->
       

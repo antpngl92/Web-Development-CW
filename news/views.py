@@ -19,6 +19,7 @@ def home(request):
             article.save()
         context = {'news':news, 'categories':categories,'title': 'News'}
     else:
+        news = News.objects.all()
         user_favourite_cat = request.user.favourite.all()
         news = News.objects.filter(category=user_favourite_cat)
         context = {'news':news, 'categories':user_favourite_cat,'title': 'News'}
