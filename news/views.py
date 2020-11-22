@@ -11,15 +11,14 @@ from account.models import Account
 # Create your views here.
 def home(request):
     context = {}
+    news = News.objects.all()
     if not request.user.is_authenticated:
-        news = News.objects.all()
         categories = Category.objects.all()
         for article in news:
             article.likes = article.users.all().count()
             article.save()
         context = {'news':news, 'categories':categories,'title': 'News'}
     else:
-        news = News.objects.all()
         user_favourite_cat = request.user.favourite.all()
         news = News.objects.filter(category=user_favourite_cat)
         context = {'news':news, 'categories':user_favourite_cat,'title': 'News'}
@@ -38,7 +37,6 @@ def like(request):
             user.likes.remove(article)
         else:
             user.likes.add(article)
-
         article.likes = article.users.all().count()
         article.save()
         user.save()
