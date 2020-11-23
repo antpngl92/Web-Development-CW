@@ -156,9 +156,3 @@
   100%{   color: #000;    }
 }
 
-.navvv{
-  position: fixed;
-  top: 0px;
-  width: 100%;
-  z-index: 10000;
-}

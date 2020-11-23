@@ -3,15 +3,15 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <div class="collapse navbar-collapse text-center" id="navbarTogglerDemo01">
       <!--LEFT SIDE NAVBAR -->
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'news_home' %}">HOME</a>
+          <a class="nav-link text-center" href="{% url 'news_home' %}">HOME</a>
       </li>
       {% for cat in categories%}
         <li class="nav-item">
-          <a class="nav-link" href="#">{{cat.name | upper }}</a>
+          <a class="nav-link text-center" href="#">{{cat.name | upper }}</a>
         </li>
   
       {% endfor %}
@@ -23,7 +23,6 @@
       <table class="navbar-nav">
         <tr>
           <td class="nav-item dropdown">
-            <!-- This should be a dropdown -->
             <a class="nav-link p-0 pr-3 nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{user.username  | capfirst}}</a>
             <div class="dropdown-menu" style="left: -100px !important;">
               <a href="{% url 'account' %}" class="dropdown-item">Account</a>
@@ -32,7 +31,6 @@
             </div>
           </td>
           <td>
-            <!-- This should be a dropdown -->
             {% if user.profile_picture %}
             <img src="{{user.profile_picture.url}}" alt="avatar image" height="35" style="border-radius: 60%;">
             </div>
