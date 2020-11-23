@@ -144,3 +144,14 @@
   border-top-right-radius: 10px ;
   border-bottom-right-radius: 10px ;
 }
+
+.blink{
+  animation:blinkingText 1.2s infinite;
+}
+@keyframes blinkingText{
+  0%{     color: #000;    }
+  49%{    color: #000; }
+  60%{    color: transparent; }
+  99%{    color:transparent;  }
+  100%{   color: #000;    }
+}
