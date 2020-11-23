@@ -35,6 +35,9 @@
 
               <div class="post-description">
                 <p class="card-text">{{news.content | slice:"600" }} ...</p>
+
+
+                {% if request.user.is_authenticated %}
                 <div class="stats">
                   <div class="row">
                     <div class="col-sm--1 ml-3"><img height="18"
@@ -43,14 +46,24 @@
                     <div id="{{news.id}}" class="col-sm-1 pl-2 likes">{{news.likes}}</div>
                   </div>
                   <hr>
+                  
                   <!-- This button text could be changed when user Likes/Unlikes an article -->
+                  
                   <div class="text-center">
                     <button type="button" id="like-button" class="btn btn-outline-dark stat-item"
                       data-id={{ news.id }}>Like</button>
                   </div>
                 </div>
+                {% else %}
+                <div class="text-center mb-5">
+
+                </div>
+                {%endif%}
+
+
               </div>
 
+              {% if request.user.is_authenticated %}
               <div class="post-footer">
                 <div class="input-group">
                   <input class="form-control" placeholder="Add a comment" type="text">
@@ -100,6 +113,7 @@
                   </li>
                 </ul>
               </div>
+              {%endif%}
             </div>
           </div>
         </div>
