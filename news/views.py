@@ -25,14 +25,13 @@ def home(request):
     return render(request, 'news/news.html', context)
 
 @csrf_exempt
-def like(request):
+def like(request, pk):
     if request.method == "POST" and request.user.is_authenticated:
         user = request.user
-        postParam = QueryDict(request.body)
-        id = postParam.__getitem__('id')
-
+        pk = pk
+        print(pk)
         likedArticles = user.likes.all()
-        article = News.objects.get(pk=id)
+        article = News.objects.get(pk=pk)
         if article in likedArticles:
             user.likes.remove(article)
         else:
