@@ -1,11 +1,12 @@
 
 .card{
-  background-color: #ADBCCA;
-  color: white;
+  background-color: white;
+  color: black;
   border-radius: 20px;
+  
 }
 .panel-white {
-  border: 1px solid #999;
+  border: 1px solid  #ddd;
   border-radius: 20px;
   background-color: white;
   color: black;
@@ -65,7 +66,7 @@
   margin-right: 8px;
 }
 .post .post-footer {
-  border-top: 1px solid #999;
+  border-top: 1px solid  #ddd;
   padding: 15px;
 }
 
@@ -114,23 +115,32 @@
   flex-direction: row;
   justify-content: center;
   text-align: center;
-
+  font-family: 'Cinzel Decorative', cursive;
 }
+
+
 .san:before, .san:after {
 
-  background: white;
+  background:   #ddd;
   content: '\a0';
   flex-grow: 1;
-  height: 10px;
+  height: 1px;
   position: relative;
   top: 0.5em;
-
 }
 .san:before {
+
   margin-right:10px;
 
 }
 .san:after {
   margin-left:10px;
+  
+}
 
+.post-but{
+  border: 1px solid #ddd !important;
+  height: 100%;
+  border-top-right-radius: 10px ;
+  border-bottom-right-radius: 10px ;
 }

@@ -3,21 +3,18 @@
 {% block content %}
 
 
-{% for category in categories%}
-{% for news in category.get_news %}
 
-{% endfor %}
-{% endfor %}
 
 
 {% for category in categories%}
 <div class="card mt-5">
   <div class="card-body">
     <h3 class="text-center san">{{ category }}</h3>
+ 
     
-    <div class="row mt-5">
+    <div class="row mt-5 ">
       {% for news in category.get_news %}
-      <div name="article" class=" d-flex p-2  panel-shadow">
+      <div name="article" class=" d-flex p-2  panel-shadow mb-5">
         <div class="col-sm-12">
 
           <div class="panel panel-white post panel-shadow">
@@ -29,13 +26,13 @@
               </div>
               <div class="pull-left meta">
                 <div class="title h5">
-                  <h5 class="card-text">{{ news.title}}</h5>
+                  <h5 class="card-text title">{{ news.title}}</h5>
                 </div>
               </div>
             </div>
 
             <div class="post-description">
-              <p class="card-text">{{news.content  }} ...</p>
+              <p class="card-text">{{news.content | slice:"600" }} ...</p>
               <div class="stats">
                 <div class="row">
                   <div class="col-sm--1 ml-3"><img height="18"
@@ -46,8 +43,7 @@
                 <hr>
                 <!-- This button text could be changed when user Likes/Unlikes an article -->
                 <div class="text-center">
-                  <button type="button" style="width: 200px !important;" id="like-button" class="btn btn-outline-dark stat-item"
-                    data-id={{ news.id }}>Like</button>
+                  <button type="button" id="like-button" class="btn btn-outline-dark stat-item" data-id={{ news.id }}>Like</button>
                 </div>
               </div>
             </div>
@@ -56,7 +52,7 @@
               <div class="input-group">
                 <input class="form-control" placeholder="Add a comment" type="text">
                 <span class="input-group-addon">
-                  <a href="#"><i class="fa fa-edit"></i></a>
+                  <button class="btn-outline-dark post-but" style="border-radius-right: 20px;"><i class="fa fa-edit"></i></button>
                 </span>
               </div>
               <ul class="comments-list">
