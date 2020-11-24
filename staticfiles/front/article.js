@@ -4,7 +4,7 @@ $(document).on('click', '#like-button', function(e){
   $.ajax
   ({
     method: 'POST',
-    url: 'like/0/'.replace('0', articleID),
+    url: '/like/0/'.replace('0', articleID),
     success: function(data)
     {
       $('#' + articleID).html(data.currentLikes);
@@ -29,4 +29,7 @@ $(document).on('click', '#delete-button', function(e){
     }
   });
 });
+
+
+
 

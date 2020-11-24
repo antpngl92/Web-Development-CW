@@ -9,7 +9,6 @@
 </div>
 {%else%}
   {% for category in categories%}
-  
   <div class="card" style="margin-top: 100px !important;">
     <div class="card-body">
       <h3 class="text-center san">{{ category }}</h3>
@@ -17,9 +16,7 @@
         {% for news in category.get_news %}
         <div name="article" class=" d-flex p-2  panel-shadow mb-5">
           <div class="col-sm-12">
-
             <div class="panel panel-white post panel-shadow">
-
               <div class="post-heading">
                 <div class="pull-left image">
                   <img style="height: 200px; width: 200px !important" src={{news.image.url}} alt="Card image cap"
@@ -31,11 +28,8 @@
                   </div>
                 </div>
               </div>
-
               <div class="post-description">
                 <p class="card-text">{{news.content | slice:"600" }} ...</p>
-
-
                 {% if request.user.is_authenticated %}
                 <div class="stats">
                   <div class="row">
@@ -45,74 +39,16 @@
                     <div id="{{news.id}}" class="col-sm-1 pl-2 likes">{{news.likes}}</div>
                   </div>
                   <hr>
-                  
                   <!-- This button text could be changed when user Likes/Unlikes an article -->
-                  
                   <div class="text-center">
-                    <button type="button" id="like-button" class="btn btn-outline-dark stat-item"
-                      data-id={{ news.id }}>Like</button>
+                    <button type="button" id="like-button" class="btn btn-outline-dark stat-item" data-id={{ news.id }}>Like</button>
+                    <a type="button" href="{% url 'article' pk=news.id %}" id="article-button" class="btn btn-outline-dark stat-item" data-id={{ news.id }}>View Full Article</a>
                   </div>
                 </div>
                 {% else %}
-                <div class="text-center mb-5">
-
-                </div>
+                <div class="text-center mb-5"></div>
                 {%endif%}
-
-
               </div>
-
-              {% if request.user.is_authenticated %}
-              <div class="post-footer">
-                <div class="input-group">
-                  <input class="form-control" placeholder="Add a comment" type="text">
-                  <span class="input-group-addon">
-                    <button class="btn-outline-dark post-but" style="border-radius-right: 20px;"><i
-                        class="fa fa-edit"></i></button>
-                  </span>
-                </div>
-                <ul class="comments-list">
-                  <li class="comment">
-                    <a class="pull-left" href="#">
-                      <img class="avatar" src="https://bootdey.com/img/Content/user_1.jpg" alt="avatar">
-                    </a>
-                    <div class="comment-body">
-                      <div class="comment-heading">
-                        <h4 class="user">Gavino Free</h4>
-                        <h5 class="time">5 minutes ago</h5>
-                      </div>
-                      <p>Sure, oooooooooooo oooohhhhhhhhhhhhhhhh</p>
-                    </div>
-                    <ul class="comments-list">
-                      <li class="comment">
-                        <a class="pull-left" href="#">
-                          <img class="avatar" src="https://bootdey.com/img/Content/user_3.jpg" alt="avatar">
-                        </a>
-                        <div class="comment-body">
-                          <div class="comment-heading">
-                            <h4 class="user">Ryan Haywood</h4>
-                            <h5 class="time">3 minutes ago</h5>
-                          </div>
-                          <p>Relax my friend</p>
-                        </div>
-                      </li>
-                      <li class="comment">
-                        <a class="pull-left" href="#">
-                          <img class="avatar" src="https://bootdey.com/img/Content/user_2.jpg" alt="avatar">
-                        </a>
-                        <div class="comment-body">
-                          <div class="comment-heading">
-                            <h4 class="user">Gavino Free</h4>
-                            <h5 class="time">3 minutes ago</h5>
-                          </div>
-                          <p>Ok, cool.</p>
-                        </div>
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-              {%endif%}
             </div>
           </div>
         </div>

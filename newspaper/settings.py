@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     # OWn Apps:
     'news',
     'account',
+    'comment'
 ]
 
 MIDDLEWARE = [

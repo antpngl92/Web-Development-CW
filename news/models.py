@@ -1,5 +1,7 @@
 from django.db import models
 
+
+
 # Create your models here.
 class News(models.Model):
     title = models.CharField(max_length=400)
@@ -50,3 +52,7 @@ class Category(models.Model):
             full_path.append(k.name)
             k = k.parent
         return ' -> '.join(full_path[::-1])
+
+
+
+    

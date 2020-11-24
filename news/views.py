@@ -1,14 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
-# Create your views here.
 from django.shortcuts import render
 from .models import News, Category
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
 from django.http import QueryDict, JsonResponse, HttpResponse
 from account.models import Account
+from comment.models import Comment 
 
-# Create your views here.
 def home(request):
     context = {}
     news = News.objects.all()
@@ -21,8 +20,28 @@ def home(request):
     else:
         user_favourite_cat = request.user.favourite.all()
         news = News.objects.filter(category=user_favourite_cat)
-        context = {'news':news, 'categories':user_favourite_cat,'title': 'News'}
+        news_comments = Comment.objects.prefetch_related('article').all()
+        context = {
+            'news':news, 
+            'categories':user_favourite_cat,
+            'comments' : news_comments,
+            'title': 'News',
+            }
     return render(request, 'news/news.html', context)
+
+def article_view(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    else:
+        article = News.objects.get(pk=pk)
+       
+        comments = Comment.objects.filter(article=article)
+        context = {
+            'article' : article,
+            'comments': comments,
+        }
+    return render(request, 'news/article.html', context)
+
 
 @csrf_exempt
 def like(request, pk):
