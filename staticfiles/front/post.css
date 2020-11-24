@@ -156,3 +156,6 @@
   100%{   color: #000;    }
 }
 
+.post-but{
+  border-radius-right: 20px;
+}

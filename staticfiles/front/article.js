@@ -1,4 +1,5 @@
 
+// Like an article 
 $(document).on('click', '#like-button', function(e){
   var articleID = $(this).data('id');
   $.ajax
@@ -12,10 +13,7 @@ $(document).on('click', '#like-button', function(e){
     }
   });
 });
-
-
-
-
+// Delete profile picture 
 $(document).on('click', '#delete-button', function(e){
   var userID = $(this).data('id');
   var csrf = $("input[name=csrfmiddlewaretoken]").val();
@@ -32,6 +30,7 @@ $(document).on('click', '#delete-button', function(e){
     }
   });
 });
+
 
 
 

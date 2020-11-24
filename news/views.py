@@ -4,9 +4,10 @@ from django.shortcuts import render
 from .models import News, Category
 from django.core import serializers
 from django.views.decorators.csrf import csrf_exempt
-from django.http import QueryDict, JsonResponse, HttpResponse
+from django.http import QueryDict, JsonResponse, HttpResponse, HttpResponseRedirect
 from account.models import Account
 from comment.models import Comment 
+from comment.form import NewCommentForm
 
 def home(request):
     context = {}
@@ -34,12 +35,22 @@ def article_view(request, pk):
         return redirect('login')
     else:
         article = News.objects.get(pk=pk)
-        comments = Comment.objects.filter(article=article)
-        context = {
-            'article' : article,
-            'comments': comments,
-            'title' : 'Article'
-        }
+        if request.method == "POST":
+            comment_form = NewCommentForm(request.POST)
+            if comment_form.is_valid():
+                user_comment = request.POST['content']
+                comment = Comment(article=article, account=request.user, content=user_comment )
+                comment.save()
+                return HttpResponseRedirect('/article/' + str(pk))
+        else:
+            comment_form = NewCommentForm()
+            comments = Comment.objects.filter(article=article)
+            context = {
+                'article' : article,
+                'comments': comments,
+                'title' : 'Article',
+                'comment_form' : comment_form,
+            }
     return render(request, 'news/article.html', context)
 
 

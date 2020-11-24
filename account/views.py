@@ -71,24 +71,25 @@ def delete_picture_API(request, id):
 
 @csrf_exempt
 def account_view(request):
-    categories = request.user.favourite.all()
+    context = {}
     if not request.user.is_authenticated:
         return redirect('login')
-    context = {}
-    if request.POST:
-        form = AccountUpdateForm(request.POST, request.FILES, request.FILES, instance = request.user)
-        if form.is_valid():
-            form.save()
-            return redirect('account')
     else:
-        form = AccountUpdateForm(
-            initial = {
-                'username' : request.user.username,
-                'email' : request.user.email,
-                'dob' : request.user.dob,
-                'favourite' : request.user.favourite.all(), 
-                'profile_picture' : request.user.profile_picture
-            }
-        )
-    context['account_form'] = form
+        categories = request.user.favourite.all()
+        if request.POST:
+            form = AccountUpdateForm(request.POST, request.FILES, request.FILES, instance = request.user)
+            if form.is_valid():
+                form.save()
+                return redirect('account')
+        else:
+            form = AccountUpdateForm(
+                initial = {
+                    'username' : request.user.username,
+                    'email' : request.user.email,
+                    'dob' : request.user.dob,
+                    'favourite' : request.user.favourite.all(), 
+                    'profile_picture' : request.user.profile_picture
+                }
+            )
+        context['account_form'] = form
     return render(request, 'account/account.html', context)
