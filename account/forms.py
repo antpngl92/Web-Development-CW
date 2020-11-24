@@ -31,7 +31,7 @@ class AccountAuthenticationForm(forms.ModelForm):
 class AccountUpdateForm(forms.ModelForm):
     class Meta:
         model = Account
-        fields = ('username', 'email', 'dob', 'favourite', 'profile_picture')
+        fields = ('username', 'email', 'favourite', 'profile_picture')
 
 
     # Make sure that the username and email that user try to change to is not already registered in the DataBase
@@ -54,3 +54,5 @@ class AccountUpdateForm(forms.ModelForm):
             except Account.DoesNotExist:
                 return email
             raise forms.ValidationError(f"Email: {account.email} is already in use.")
+
+

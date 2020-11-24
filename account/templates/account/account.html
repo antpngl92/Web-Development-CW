@@ -1,9 +1,48 @@
 {% extends 'news/base.html' %}
 
 {% block content %}
-
+<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        ...
+      </div>
+    </div>
+  </div>
+  
 <h2>Account</h2>
-<form method="POST">{% csrf_token %}
+<form method="POST" enctype="multipart/form-data">{% csrf_token %}
+{{account_form.non_field_errors}}
+<div class="fieldWrapper">
+    <div class="profile-picture">
+        <img height="200px" width="200px" src="{{ request.user.profile_picture.url }}" alt="Avathar"/>
+    </div>
+    <button type="button" id="delete-button" data-id={{request.user.id}}>Delete</button>
+</div>
+
+<div class="fieldWrapper">
+    
+    {{account_form.profile_picture.errors}}
+    {{account_form.profile_picture}}
+</div>
+<div class="fieldWrapper">
+    {{account_form.username.errors}}
+    <label for="{{account_form.username.id_for_label}}">Username:</label>
+    {{account_form.username}}
+</div>
+<div class="fieldWrapper">
+    {{account_form.email.errors}}
+    <label for="{{account_form.email.id_for_label}}">Email:</label>
+    {{account_form.email}}
+</div>
+<div class="fieldWrapper">
+    {{account_form.favourite.errors}}
+    <label for="{{account_form.favourite.id_for_label}}">News Category:</label>
+    {{account_form.favourite}}
+</div>
+<button id="sub_button" type="submit">Save Changes</button>
+</form> 
+<!-- <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+    {{account_form.as_ul}}
     {% for field in account_form%}
         <p>
             {{field.label_tag}}
@@ -24,7 +63,9 @@
             {% endif %}
         </p>
     {% endfor %}
+    
+    <img height="200px" width="200px" src="{{ request.user.profile_picture.url }}" alt="Avathar"/>
     <button type="submit">Save Changes</button>
-</form>
+</form> -->
 
 {% endblock %}

@@ -31,13 +31,8 @@
             </div>
           </td>
           <td>
-            {% if user.profile_picture %}
-            <img src="{{user.profile_picture.url}}" alt="avatar image" height="35" style="border-radius: 60%;">
+            <img id="nav_profile_pic"src="{{user.profile_picture.url}}" alt="avatar image" height="35" style="border-radius: 60%;">
             </div>
-            {% else %}
-            <img src="https://e7.pngegg.com/pngimages/833/38/png-clipart-user-profile-computer-software-internet-bot-user-miscellaneous-service.png" alt="avatar image" height="35" style="border-radius: 60%;">
-            </div>
-            {% endif %}
           </td>
         </tr>
       </table>

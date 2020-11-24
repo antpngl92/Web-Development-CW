@@ -37,9 +37,9 @@ class Account(AbstractBaseUser):
     username = models.CharField(verbose_name='username', max_length=20, unique=True)
     email = models.EmailField(verbose_name='email', max_length=60, unique=True)
     dob = models.DateField(verbose_name='date of birth', null=True)
-    favourite = models.ManyToManyField(Category)
+    favourite = models.ManyToManyField(Category, blank=True )
     likes = models.ManyToManyField(News, related_name="users")
-    profile_picture = models.ImageField()
+    profile_picture = models.ImageField(upload_to ='profilePic/', default = 'profilePic/pp.png')
 
     # The fields bellow are REQUIRED for AbstractBaseUser class (for custom user model)
     date_joined = models.DateTimeField(verbose_name='date joined', auto_now_add=True)

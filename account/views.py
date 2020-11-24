@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect
 from account.models import Account
 from django.contrib.auth import login, authenticate, logout
 from account.forms import RegistrationForm, AccountAuthenticationForm, AccountUpdateForm
+from django.views.decorators.csrf import csrf_exempt
+from django.http import QueryDict, JsonResponse
+from django.http import HttpResponseRedirect
+import os 
 
 def registration_view(request):
     user = request.user
@@ -53,24 +57,35 @@ def login_view(request):
     context['login_form'] = form
     context['title'] = 'Login'
     return render(request, 'account/login.html', context)
+@csrf_exempt
+def delete_picture_API(request, id):
+    user = request.user
+    current_image = user.profile_picture
+    current_image.delete()
+    image = "profilePic/pp.png"
+    user.profile_picture = image
+    user.save()
+    return JsonResponse({'status':'Deleted!'})
+    
 
-
+@csrf_exempt
 def account_view(request):
-
+    categories = request.user.favourite.all()
     if not request.user.is_authenticated:
         return redirect('login')
     context = {}
     if request.POST:
-        form = AccountUpdateForm(request.POST, instance = request.user)
+        form = AccountUpdateForm(request.POST, request.FILES, request.FILES, instance = request.user)
         if form.is_valid():
             form.save()
+            return redirect('account')
     else:
         form = AccountUpdateForm(
             initial = {
                 'username' : request.user.username,
                 'email' : request.user.email,
                 'dob' : request.user.dob,
-                # 'favourite' : request.user.favourite, 
+                'favourite' : request.user.favourite.all(), 
                 'profile_picture' : request.user.profile_picture
             }
         )

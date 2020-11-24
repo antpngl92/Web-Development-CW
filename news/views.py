@@ -29,8 +29,8 @@ def like(request, pk):
     if request.method == "POST" and request.user.is_authenticated:
         user = request.user
         pk = pk
-        print(pk)
         likedArticles = user.likes.all()
+        print(likedArticles)
         article = News.objects.get(pk=pk)
         if article in likedArticles:
             user.likes.remove(article)
