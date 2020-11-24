@@ -6,6 +6,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import QueryDict, JsonResponse
 from django.http import HttpResponseRedirect
 import os 
+
+
 @csrf_exempt
 def registration_view(request):
     user = request.user
@@ -33,13 +35,13 @@ def registration_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
+
 @csrf_exempt
 def login_view(request):
     context = {}
     user = request.user
     if user.is_authenticated:
         return redirect('news_home')
-    
     if request.POST:
         form = AccountAuthenticationForm(request.POST)
         if form.is_valid:
@@ -49,9 +51,9 @@ def login_view(request):
             if user:
                 login(request, user)
                 return redirect('news_home')
-    
     else:
         form = AccountAuthenticationForm()
+        
     context['login_form'] = form
     context['title'] = 'Login'
     return render(request, 'account/login.html', context)
