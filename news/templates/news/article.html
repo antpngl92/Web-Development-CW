@@ -34,11 +34,9 @@
                     <div id="{{news.id}}" class="col-sm-1 pl-2 likes">{{article.likes}}</div>
                   </div>
                   <hr>
-                  
                   <!-- This button text could be changed when user Likes/Unlikes an article -->
-                  
                   <div class="text-center">
-                    <button type="button" id="like-button" class="btn btn-outline-dark stat-item" data-id={{ article.id }}>Like</button>
+                    <button type="button" id="article-like-button" class="btn btn-outline-dark stat-item" data-id={{ article.id }}>Like</button>
                     <a type="button" href="{% url 'news_home' %}" id="article-button" class="btn btn-outline-dark stat-item" data-id={{ news.id }}>Go back to News</a>
                 </div>
                 </div>

@@ -26,6 +26,8 @@ $(document).on('click', '#delete-button', function(e){
     {
       $(".profile-picture").html('<img src="/media/profilePic/pp.png" alt="avatar image" height="200" width="200">');
       $("#nav_profile_pic").attr('src', '/media/profilePic/pp.png');
+      $(".delete_profile_button").html('<p>You cannot delete your default profile picture</p>');
+
     }
   });
 });

@@ -16,7 +16,13 @@
     <div class="profile-picture">
         <img height="200px" width="200px" src="{{ request.user.profile_picture.url }}" alt="Avathar"/>
     </div>
-    <button type="button" id="delete-button" data-id={{request.user.id}}>Delete</button>
+    <div class="delete_profile_button">
+        {% if request.user.profile_picture.url == "/media/profilePic/pp.png" %}
+            <p>You cannot delete your default profile picture</p>
+        {% else %}
+            <button type="button" id="delete-button" data-id={{request.user.id}}>Delete</button>
+        {% endif %}
+    </div>
 </div>
 
 <div class="fieldWrapper">

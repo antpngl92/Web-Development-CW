@@ -34,11 +34,11 @@ def article_view(request, pk):
         return redirect('login')
     else:
         article = News.objects.get(pk=pk)
-       
         comments = Comment.objects.filter(article=article)
         context = {
             'article' : article,
             'comments': comments,
+            'title' : 'Article'
         }
     return render(request, 'news/article.html', context)
 

@@ -6,7 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import QueryDict, JsonResponse
 from django.http import HttpResponseRedirect
 import os 
-
+@csrf_exempt
 def registration_view(request):
     user = request.user
     if user.is_authenticated:
@@ -33,7 +33,7 @@ def registration_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
-
+@csrf_exempt
 def login_view(request):
     context = {}
     user = request.user
@@ -46,17 +46,16 @@ def login_view(request):
             username = request.POST['username']
             password = request.POST['password']
             user = authenticate(username=username, password=password)
-
             if user:
                 login(request, user)
                 return redirect('news_home')
     
     else:
         form = AccountAuthenticationForm()
-
     context['login_form'] = form
     context['title'] = 'Login'
     return render(request, 'account/login.html', context)
+
 @csrf_exempt
 def delete_picture_API(request, id):
     user = request.user
