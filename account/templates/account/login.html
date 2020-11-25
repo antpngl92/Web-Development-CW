@@ -4,12 +4,12 @@
 
 
 <h2>Login</h2>
-<form class="form-signin" method="POST">{% csrf_token %}
+<form class="form-signin" method="POST">
     {% for field in login_form %}
     <p>
         {{field.label_tag}}
         {{field}}
-
+        {% csrf_token %}
         {% for error in field.errors %}
             <p style="color: red;">{{error}}</p>
         {% endfor %}

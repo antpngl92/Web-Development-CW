@@ -23,6 +23,7 @@ class AccountAuthenticationForm(forms.ModelForm):
     
     def clean(self):
         if self.is_valid():
+
             username = self.cleaned_data['username']
             password = self.cleaned_data['password']
             if not authenticate(username=username, password=password):

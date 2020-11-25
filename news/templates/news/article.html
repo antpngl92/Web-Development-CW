@@ -52,32 +52,49 @@
               <div class="post-footer">
                 <!-- Comment input filed -->
                 <div class="input-group">
-                  <form id='comment_form' class="input-group" method="POST">
+                  <!-- <form id='comment_form' class="input-group" method="POST">
                     {{comment_form.content}}
                     {% csrf_token %}
                     <span class="input-group-addon">
                       <button type="submit" class="btn-outline-dark post-but"><i class="fa fa-edit"></i></button>
-                    </span>
-                  </form>
+                    </span> 
+                   <br> {{comment_form.parent}}
+                  </form> -->
                 </div>
                  <!-- END Comment input filed -->
                  <!-- Comments -->
-                {% for comment in comments%}
-                  <ul class="comments-list">
-                    <li class="comment">
+                  {% load mptt_tags %}
+                  <div class="comments-list">
+                    {% recursetree comments %}
+                    <div id="{{ node.id }}" class="my-2 p-2 comment">
                       <a class="pull-left" href="#">
-                        <img class="avatar" height="35" src="{{ comment.account.profile_picture.url }}" alt="avatar">
+                        <img class="avatar" height="29" width="35" style="border-radius: 100%;" src="{{node.account.profile_picture.url}}" alt="avatar">
                       </a>
                       <div class="comment-body">
                         <div class="comment-heading">
-                          <h4 class="user">{{comment.account.username}}</h4>
-                          <h5 class="time">{{comment.publish}}</h5>
+                          <div class="user">{{ node.account.username }}</div>
                         </div>
-                        <p>{{comment.content}}</p>
+                        <div>{{ node.content }}</div>
+                        <div class="comment-heading comment_foot">
+                          {% if node.level < 3%}
+                            <button id="new_comment_button" class="button" data-id="{{node.id}}">Reply</button>
+                          {% endif %} 
+                          <div class="time">{{node.publish}}</div>
+                        </div>
                       </div>
-                    </li>
-                {%endfor%}    
-                  </ul>
+                    
+
+                      
+                    </div>
+                      {% if not node.is_leaf_node %}
+                      <div class="children p1-2 pl-md-5">
+                        {{ children }}
+                      </div>
+                      {% endif %}
+                      
+                    {% endrecursetree %}
+                  </div>   
+              </div>
                 <!-- END Comments -->
               </div>
             </div>
@@ -87,33 +104,7 @@
       </div>
     </div>
   </div>
+  <script>
+  var CSRF_TOKEN = '{{ csrf_token }}'
+  </script>
 {% endblock %}
-
- <!-- Answers to comments
-                            <ul class="comments-list">
-                            <li class="comment">
-                                <a class="pull-left" href="#">
-                                <img class="avatar" src="https://bootdey.com/img/Content/user_3.jpg" alt="avatar">
-                                </a>
-                                <div class="comment-body">
-                                <div class="comment-heading">
-                                    <h4 class="user">Ryan Haywood</h4>
-                                    <h5 class="time">3 minutes ago</h5>
-                                </div>
-                                <p>Relax my friend</p>
-                                </div>
-                            </li>
-
-                            <li class="comment">
-                                <a class="pull-left" href="#">
-                                <img class="avatar" src="https://bootdey.com/img/Content/user_2.jpg" alt="avatar">
-                                </a>
-                                <div class="comment-body">
-                                <div class="comment-heading">
-                                    <h4 class="user">Gavino Free</h4>
-                                    <h5 class="time">3 minutes ago</h5>
-                                </div>
-                                <p>Ok, cool.</p>
-                                </div>
-                            </li>
-                            </ul> -->

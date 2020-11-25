@@ -39,8 +39,15 @@ def article_view(request, pk):
             comment_form = NewCommentForm(request.POST)
             if comment_form.is_valid():
                 user_comment = request.POST['content']
-                comment = Comment(article=article, account=request.user, content=user_comment )
+                parent_comment_pk = request.POST['parent']
+                if parent_comment_pk == '':
+                    comment = Comment(article=article, account=request.user, content=user_comment )
+                else:
+                    parent_comment = Comment.objects.get(pk=parent_comment_pk)
+                    comment = Comment(article=article, parent=parent_comment, account=request.user, content=user_comment )
+                # print("This ----------------------------__> " + str(comment_parent))
                 comment.save()
+                comment = Comment.objects.filter(content=user_comment)
                 return HttpResponseRedirect('/article/' + str(pk))
         else:
             comment_form = NewCommentForm()

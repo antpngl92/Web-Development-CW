@@ -10,7 +10,7 @@
   </div>
   
 <h2>Account</h2>
-<form method="POST" enctype="multipart/form-data">{% csrf_token %}
+<form method="POST" enctype="multipart/form-data">
 {{account_form.non_field_errors}}
 <div class="fieldWrapper">
     <div class="profile-picture">
@@ -44,6 +44,7 @@
     <label for="{{account_form.favourite.id_for_label}}">News Category:</label>
     {{account_form.favourite}}
 </div>
+{% csrf_token %}
 <button id="sub_button" type="submit">Save Changes</button>
 </form> 
 <!-- <form method="POST" enctype="multipart/form-data">{% csrf_token %}

@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from news.models import News, Category
 
 class MyAccountManager(BaseUserManager):
-    def create_user(self, username, email, dob, password=None):
+    def create_user(self, username,  password=None):
         if not username:
             raise ValueError("You must provide username!")
         if not email:
@@ -20,7 +20,7 @@ class MyAccountManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, username, email, dob, password):
+    def create_superuser(self, username, password):
         user = self.create_user(
             username=username,
             email=email,
@@ -38,7 +38,7 @@ class Account(AbstractBaseUser):
     email = models.EmailField(verbose_name='email', max_length=60, unique=True)
     dob = models.DateField(verbose_name='date of birth', null=True)
     favourite = models.ManyToManyField(Category, blank=True )
-    likes = models.ManyToManyField(News, related_name="users")
+    likes = models.ManyToManyField(News, related_name="users",blank=True)
     profile_picture = models.ImageField(upload_to ='profilePic/', default = 'profilePic/pp.png')
 
     # The fields bellow are REQUIRED for AbstractBaseUser class (for custom user model)
