@@ -5,7 +5,7 @@ $(document).on('click', '#like-button', function(e){
   $.ajax
   ({
     method: 'POST',
-    url: '/like/0/'.replace('0', articleID),
+    url: END_POINT_LIKE.replace("0", articleID),
     success: function(data)
     {
       console.log(data.currentLikes)

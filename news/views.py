@@ -71,7 +71,6 @@ def article_view(request, pk):
 def like(request, pk):
     if request.method == "POST" and request.user.is_authenticated:
         user = request.user
-        pk = pk
         likedArticles = user.likes.all()
         article = News.objects.get(pk=pk)
         if article in likedArticles:

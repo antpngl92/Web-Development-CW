@@ -94,7 +94,10 @@
   </div>
 
   <script>
+  // Global variables for the .js script 
   var CSRF_TOKEN = '{{ csrf_token }}'
+  var END_POINT_LIKE = "{% url 'like' 0 %}"
+
 
     $(function (){
 
@@ -116,6 +119,9 @@
               </form>')
       }
     })
+
+
+
 
   </script>
 {% endblock %}
