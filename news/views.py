@@ -9,6 +9,7 @@ from account.models import Account
 from comment.models import Comment 
 from comment.form import NewCommentForm
 
+
 def home(request):
     context = {}
     news = News.objects.all()
@@ -34,7 +35,10 @@ def article_view(request, pk):
     if not request.user.is_authenticated:
         return redirect('login')
     else:
+        context = {}
         article = News.objects.get(pk=pk)
+        allcomments = article.comments.filter()
+        print(allcomments)
         if request.method == "POST":
             comment_form = NewCommentForm(request.POST)
             if comment_form.is_valid():
@@ -45,7 +49,6 @@ def article_view(request, pk):
                 else:
                     parent_comment = Comment.objects.get(pk=parent_comment_pk)
                     comment = Comment(article=article, parent=parent_comment, account=request.user, content=user_comment )
-                # print("This ----------------------------__> " + str(comment_parent))
                 comment.save()
                 comment = Comment.objects.filter(content=user_comment)
                 return HttpResponseRedirect('/article/' + str(pk))
@@ -59,6 +62,9 @@ def article_view(request, pk):
                 'comment_form' : comment_form,
             }
     return render(request, 'news/article.html', context)
+
+
+        
 
 
 @csrf_exempt

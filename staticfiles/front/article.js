@@ -13,6 +13,7 @@ $(document).on('click', '#like-button', function(e){
     }
   });
 });
+
 // Delete profile picture 
 $(document).on('click', '#delete-button', function(e){
   var userID = $(this).data('id');
@@ -57,4 +58,5 @@ function formExit(){
   $('#newForm').remove();
   $('#close_but').remove();
 }
+
 

@@ -2,8 +2,6 @@
 
 {% block content %}
 
-
-  
   <div class="card" style="margin-top: 100px !important;">
     <div class="card-body">
       <h3 class="text-center san">{{ article.category }}</h3>
@@ -41,70 +39,83 @@
                   </div>
                   <hr>
                   <!-- This button text could be changed when user Likes/Unlikes an article -->
-                  <div class="text-center">
+                  <div class="text-center footer_buttons">
                     <button type="button" id="like-button" class="btn btn-outline-dark stat-item" data-id={{ article.id }}>Like</button>
                     <a type="button" href="{% url 'news_home' %}" id="article-button" class="btn btn-outline-dark stat-item" data-id={{ news.id }}>Go back to News</a>
                   </div>
+                 
                 </div>
               </div>
+             
+          
 
 
+              
               <div class="post-footer">
-                <!-- Comment input filed -->
-                <div class="input-group">
-                  <!-- <form id='comment_form' class="input-group" method="POST">
-                    {{comment_form.content}}
-                    {% csrf_token %}
-                    <span class="input-group-addon">
-                      <button type="submit" class="btn-outline-dark post-but"><i class="fa fa-edit"></i></button>
-                    </span> 
-                   <br> {{comment_form.parent}}
-                  </form> -->
-                </div>
-                 <!-- END Comment input filed -->
-                 <!-- Comments -->
+                <div class="text-center first_comments"> </div>
                   {% load mptt_tags %}
-                  <div class="comments-list">
-                    {% recursetree comments %}
-                    <div id="{{ node.id }}" class="my-2 p-2 comment">
-                      <a class="pull-left" href="#">
-                        <img class="avatar" height="29" width="35" style="border-radius: 100%;" src="{{node.account.profile_picture.url}}" alt="avatar">
-                      </a>
-                      <div class="comment-body">
-                        <div class="comment-heading">
-                          <div class="user">{{ node.account.username }}</div>
-                        </div>
-                        <div>{{ node.content }}</div>
-                        <div class="comment-heading comment_foot">
-                          {% if node.level < 3%}
-                            <button id="new_comment_button" class="button" data-id="{{node.id}}">Reply</button>
-                          {% endif %} 
-                          <div class="time">{{node.publish}}</div>
-                        </div>
+                <!-- Comments -->
+                <div class="comments-list">
+                  {% recursetree comments %}
+                  <div id="{{ node.id }}" class="my-2 p-2 comment">
+                    <a class="pull-left" href="#">
+                      <img class="avatar" height="29" width="35" style="border-radius: 100%;" src="{{node.account.profile_picture.url}}" alt="avatar">
+                    </a>
+                    <div class="comment-body">
+                      <div class="comment-heading">
+                        <div class="user">{{ node.account.username }}</div>
                       </div>
-                    
-
-                      
+                      <div>{{ node.content }}</div>
+                      <div class="comment-heading comment_foot">
+                        {% if node.level < 3%}
+                          <button id="new_comment_button" class="button" data-id="{{node.id}}" data-article="{{article.id}}">Reply</button>
+                        {% endif %} 
+                        <div class="time">{{node.publish}}</div>
+                      </div>
                     </div>
+                  </div><hr>
                       {% if not node.is_leaf_node %}
                       <div class="children p1-2 pl-md-5">
                         {{ children }}
                       </div>
+                      
                       {% endif %}
                       
                     {% endrecursetree %}
+                    
                   </div>   
               </div>
                 <!-- END Comments -->
-              </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
+
   <script>
   var CSRF_TOKEN = '{{ csrf_token }}'
+
+    $(function (){
+
+    var firstComment = false;
+      if ( $( ".comment" ).length ) {
+        
+      }
+      else{
+        $('.first_comments').append(' ' + 
+              '<form id="firstComment" class="input-group" method="post"> \
+                <select name="parent" class="d-none" id="id_parentt"> \
+                <option value="" selected=""></option> \
+                </select> \
+                <textarea id="textarea" name="content" cols="40" rows="2" placeholder="Add the first comment"  required id="id_content"></textarea> \
+                <input type="hidden" name="csrfmiddlewaretoken" value="' + CSRF_TOKEN + '">\ \
+                <span class="input-group-addon">\
+                  <button type="submit" class="btn-outline-dark post-but"><i class="fa fa-edit"></i></button>\
+                </span>\
+              </form>')
+      }
+    })
+
   </script>
 {% endblock %}
