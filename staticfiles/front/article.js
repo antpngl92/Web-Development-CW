@@ -109,6 +109,7 @@ $(document).on('click', '#delete_comment', function(){
   var articleID = $(this).data('article'); 
   var commentID = $(this).data('id');
   var comment_row = $(this).parent().parent().parent() // get the comment row for deleteion
+  console.log(comment_row)
   $.ajax({
     method: 'DELETE',
     data: {
@@ -238,7 +239,7 @@ $(document).on('click', '.reply_comment_button', function(){
     e.preventDefault();
     var comment_content = $('#textarea').val()
     formExit()
-    
+
     $.ajax({
       method: 'POST',
       data: {
