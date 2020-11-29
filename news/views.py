@@ -89,8 +89,7 @@ def edit_comment_api(request, pk):
 
         comment_date = Comment.objects.get(pk=pk)
         comment_date = comment_date.publish
-        print(comment_date)
-
+        
         comment = Comment(pk=pk, article=article, account=request.user, content=comment_content, publish=comment_date)
         comment.save()
     return JsonResponse({'status': 'Saved'})
