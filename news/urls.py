@@ -10,7 +10,10 @@ urlpatterns = [
     path('' ,home, name='news_home'),
     path('get_news_API/', get_cat_API, name="get_news_api"),
     path('like/<int:pk>/', like, name="like"),
-    path('article/<int:pk>/', article_view, name='article')
+    path('article/<int:pk>/', article_view, name='article'),
+    path('comment', new_comment_api, name='new comment'),
+    path('delete/comment/<int:pk>/', delete_comment_api, name='delete comment'),
+    path('edit/comment/<int:pk>/', edit_comment_api, name='edit comment'),
 ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -138,11 +138,14 @@
   
 }
 
-.post-but{
+.post-but, .edit-post-but{
   border: 1px solid #ddd !important;
   height: 100%;
   border-top-right-radius: 10px ;
   border-bottom-right-radius: 10px ;
+}
+.post-but, .edit-post-but{
+  border-radius-right: 20px;
 }
 
 .blink{
@@ -156,10 +159,9 @@
   100%{   color: #000;    }
 }
 
-.post-but{
-  border-radius-right: 20px;
-}
-#new_comment_button, #close_but{
+
+
+.reply_comment_button, #delete_comment, #edit_comment, #close_but{
   background: none!important;
   border: none;
   padding: 0!important;
@@ -170,4 +172,12 @@
   text-decoration: underline;
   cursor: pointer;
   font-size: 14px;
+}
+#newForm > textarea{
+  width: 96% !important;
+}
+
+.inactiveLink {
+  pointer-events: none !important;
+  cursor: default !important;
 }

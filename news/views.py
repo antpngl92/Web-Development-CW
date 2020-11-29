@@ -64,7 +64,44 @@ def article_view(request, pk):
     return render(request, 'news/article.html', context)
 
 
-        
+@csrf_exempt        
+def new_comment_api(request):
+    if request.method == "POST" and request.user.is_authenticated:
+        articleID = request.POST['article_id']
+        article = News.objects.get(pk=articleID)
+        content = request.POST['content']
+        comment = Comment(article=article, account=request.user, content=content )
+        comment.save()
+        new_comment_id = comment.pk
+        new_comment_date = comment.publish
+        data = []
+        data.append(new_comment_id)
+        data.append(new_comment_date)
+    return JsonResponse(data, safe=False)
+
+@csrf_exempt
+def edit_comment_api(request, pk):
+    if request.method == "PUT" and request.user.is_authenticated:
+        data = QueryDict(request.body)
+        comment_content = data['content']
+        article_pk = data['article_id']
+        article = News.objects.get(pk=article_pk)
+
+        comment_date = Comment.objects.get(pk=pk)
+        comment_date = comment_date.publish
+        print(comment_date)
+
+        comment = Comment(pk=pk, article=article, account=request.user, content=comment_content, publish=comment_date)
+        comment.save()
+    return JsonResponse({'status': 'Saved'})
+
+
+@csrf_exempt
+def delete_comment_api(request, pk):
+    if request.method == "DELETE" and request.user.is_authenticated:
+        comment = Comment.objects.get(pk=pk)
+        comment.delete()
+    return JsonResponse("success", safe=False)    
 
 
 @csrf_exempt
