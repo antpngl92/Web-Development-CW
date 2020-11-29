@@ -79,11 +79,11 @@
                         <div class="time">{{node.publish}}</div>
                       </div>
                     </div>
-                    {% if not node.is_leaf_node %}
                     <div class="children p1-2 pl-md-5 children-{{node.id}}">
-                      {{ children }}
+                      {% if not node.is_leaf_node %}
+                        {{ children }}
+                      {% endif %}
                     </div>
-                    {% endif %}
                   </div>
                      
                       

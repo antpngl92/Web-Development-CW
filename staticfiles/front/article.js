@@ -8,7 +8,6 @@ $(document).on('click', '#like-button', function(e){
     url: END_POINT_LIKE.replace("0", articleID),
     success: function(data)
     {
-      console.log(data.currentLikes)
       $('#' + articleID).html(data.currentLikes);
     }
   });
@@ -109,7 +108,6 @@ $(document).on('click', '#delete_comment', function(){
   var articleID = $(this).data('article'); 
   var commentID = $(this).data('id');
   var comment_row = $(this).parent().parent().parent() // get the comment row for deleteion
-  console.log(comment_row)
   $.ajax({
     method: 'DELETE',
     data: {
@@ -201,23 +199,6 @@ $(document).on('click', '.reply_comment_button', function(){
   var comment_row = $(this).parent().parent().parent() 
   var comment_id = $(this).data('id')
   var comment_level = $(this).data('level')
-  var article_id = $(this).data('article')
-
-  console.log(comment_row)
-  console.log(comment_id)
-  console.log(comment_level)
- 
-
-
-  if(comment_level >= 3) comment_level = 3;
-  else comment_level++;
-
-  var allow_more_replies = "";
-
-  var child_id = 0;
-  
-  if(comment_level < 3) allow_more_replies = '' + 
-                                    '<button id="" class="button reply_comment_button" data-level="' + comment_level +  '" data-id="'+ child_id + '" data-article="'+ article_id +'">Reply</button>'
   
   comment_row.append(' ' + 
                 '<button type="button" class="btn btn-outline-secondary mb-3" id="close_but" onclick="formExit()"> \
@@ -230,31 +211,73 @@ $(document).on('click', '.reply_comment_button', function(){
                   <textarea class="asd" id="textarea" name="content" cols="40" rows="2"  required id="id_content"></textarea> \
                   <input type="hidden" name="csrfmiddlewaretoken" value="' + CSRF_TOKEN + '">\ \
                   <span class="input-group-addon">\
-                    <button id="reply-post-but" type="submit" class="btn-outline-dark "><i class="fa fa-edit"></i></button>\
+                    <button id="reply-post-but" data-id="'+ comment_id +'"type="submit" data-level = "' + comment_level + '"class="btn-outline-dark "><i class="fa fa-edit"></i></button>\
                   </span>\
                 </form>')
-
-  $(document).on('click', '#reply-post-but', function(e){
+})
+$(document).on('click', '#reply-post-but', function(e){
     
-    e.preventDefault();
-    var comment_content = $('#textarea').val()
+  e.preventDefault();
+  var comment_content = $('#textarea').val()
+  var article_id = $('.reply_comment_button').data('article')
+  var comment_id = $(this).data('id')
+  var comment_level = $(this).data('level')
+
+  comment_level = more_reply_levels(comment_level);
+
+  console.log("===============================================================================")
+  console.log("Comment ID: " + comment_id)
+  console.log("Comment Lvl: " + comment_level)
+  console.log("Comment content: " + comment_content)
+
+  formExit()
+  $.ajax({
+    method: 'POST',
+    data: {
+      'content': comment_content,
+      'article_id' : article_id
+    },
+    url: END_POINT_REPLY_TO_COMMENT.replace("0", comment_id),
+    success: function(id)
+    {
+      console.log("Child ID: " + id[0])
+      console.log("Child Time: " + id[1])
+      var reply_button = create_reply_button(comment_level, id[0], article_id);
+      $('.children-' + comment_id).append('' + 
+      '<div id="{{ node.id }}" class="my-2 p-2 comment">\
+      <a class="pull-left inactiveLink" href="#">\
+        <img class="avatar" height="29" width="35" style="border-radius: 100%;"  src="'+ ACCOUNT_PROFILE_PICTURE + '" alt="avatar">\
+      </a>\
+      <div class="comment-body">\
+        <div class="comment-heading">\
+          <div class="user">'+ ACCOUNT_USERNAME + ' || Comment ID: ' + id[0] +'</div>\
+        </div>\
+        <div id="comment-content-' +id[0] + '">'+ comment_content + '</div>\
+        <div class="comment-heading comment_foot">\
+        ' + reply_button + '\
+          | <button id="delete_comment" class="button" data-id="' + id[0] +'" data-article="{{article.id}}">Delete</button>\
+          | <button id="edit_comment" class="button" data-id="' + id[0] +'" data-article="{{article.id}}">Edit</button>\
+          <div class="time">' + id[1] +'</div>\
+        </div>\
+      </div>\
+      <div class="children p1-2 pl-md-5 children-' + id[0] + '">\
+      </div>\
+    </div> ')
     formExit()
-
-    $.ajax({
-      method: 'POST',
-      data: {
-        'content': comment_content,
-        'article_id' : article_id
-      },
-      url: END_POINT_REPLY_TO_COMMENT.replace("0", comment_id),
-      success: function(id)
-      {
-
-        
-        updateCommentsCount("add") // Update comment count 
-         // close form
-      }
-    })
+    updateCommentsCount("add") // Update comment count 
+       // close form
+    }
   })
 })
   
+function more_reply_levels(current_level){
+  if(current_level >= 3) current_level = 3;
+  else current_level++;
+  return current_level;
+}
+
+function create_reply_button(comment_level, child_id , article_id){
+  if(comment_level < 3) reply_button = '<button id="" class="button reply_comment_button" data-level="' + comment_level +  '" data-id="'+ child_id + '" data-article="'+ article_id +'">Reply</button>'
+  else reply_button = ''
+  return reply_button
+}
