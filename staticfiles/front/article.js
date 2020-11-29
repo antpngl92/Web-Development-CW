@@ -240,9 +240,12 @@ $(document).on('click', '#reply-post-but', function(e){
     url: END_POINT_REPLY_TO_COMMENT.replace("0", comment_id),
     success: function(id)
     {
-      console.log("Child ID: " + id[0])
-      console.log("Child Time: " + id[1])
-      var reply_button = create_reply_button(comment_level, id[0], article_id);
+      var child_comment = id[0]
+      var child_comment_publish_date = id[1]
+
+      console.log("Child ID: " + child_comment)
+      console.log("Child Time: " + child_comment_publish_date)
+      var reply_button = create_reply_button(comment_level, child_comment, article_id);
       $('.children-' + comment_id).append('' + 
       '<div id="{{ node.id }}" class="my-2 p-2 comment">\
       <a class="pull-left inactiveLink" href="#">\
@@ -250,17 +253,17 @@ $(document).on('click', '#reply-post-but', function(e){
       </a>\
       <div class="comment-body">\
         <div class="comment-heading">\
-          <div class="user">'+ ACCOUNT_USERNAME + ' || Comment ID: ' + id[0] +'</div>\
+          <div class="user">'+ ACCOUNT_USERNAME + ' || Comment ID: ' + child_comment +'</div>\
         </div>\
-        <div id="comment-content-' +id[0] + '">'+ comment_content + '</div>\
+        <div id="comment-content-' + child_comment + '">'+ comment_content + '</div>\
         <div class="comment-heading comment_foot">\
         ' + reply_button + '\
-          | <button id="delete_comment" class="button" data-id="' + id[0] +'" data-article="{{article.id}}">Delete</button>\
-          | <button id="edit_comment" class="button" data-id="' + id[0] +'" data-article="{{article.id}}">Edit</button>\
-          <div class="time">' + id[1] +'</div>\
+          | <button id="delete_comment" class="button" data-id="' + child_comment +'" data-article="{{article.id}}">Delete</button>\
+          | <button id="edit_comment" class="button" data-id="' + child_comment +'" data-article="{{article.id}}">Edit</button>\
+          <div class="time">' + child_comment_publish_date +'</div>\
         </div>\
       </div>\
-      <div class="children p1-2 pl-md-5 children-' + id[0] + '">\
+      <div class="children p1-2 pl-md-5 children-' + child_comment + '">\
       </div>\
     </div> ')
     formExit()
