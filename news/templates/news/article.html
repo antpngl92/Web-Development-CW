@@ -2,7 +2,7 @@
 
 {% block content %}
 
-  <div class="card" style="margin-top: 100px !important;">
+  <div class="card mb-5" style="margin-top: 100px !important;">
     <div class="card-body">
       <h3 class="text-center san">{{ article.category }}</h3>
       <div class="row mt-5 ">
@@ -70,7 +70,7 @@
                       <div id="comment-content-{{node.id}}">{{ node.content }}</div>
                       <div class="comment-heading comment_foot">
                         {% if node.level < 3%}
-                          <button id="" class="button reply_comment_button" data-id="{{node.id}}" data-article="{{article.id}}">Reply</button>
+                          <button id="" class="button reply_comment_button" data-id="{{node.id}}" data-level="{{node.level}}"data-article="{{article.id}}">Reply</button>
                         {% endif %} 
                         {% if node.account.username == user.username%}
                         | <button id="delete_comment" class="button" data-id="{{node.id}}" data-article="{{article.id}}">Delete</button>
@@ -79,16 +79,16 @@
                         <div class="time">{{node.publish}}</div>
                       </div>
                     </div>
-                  </div><hr>
+                  </div>
                       {% if not node.is_leaf_node %}
-                      <div class="children p1-2 pl-md-5">
+                      <div class="children p1-2 pl-md-5 children-{{node.id}}">
                         {{ children }}
                       </div>
                       
                       {% endif %}
                       
                     {% endrecursetree %}
-                    
+                    <hr>
                   </div>   
               </div>
                 <!-- END Comments -->
@@ -111,6 +111,7 @@
   var END_POINT_LIKE = "{% url 'like' 0 %}"
   var END_POINT_NEW_COMMENT = "{% url 'new comment' %}"
   var END_POINT_EDIT_COMMENT = "{% url 'edit comment' 0 %}"
+  var END_POINT_REPLY_TO_COMMENT = "{% url 'reply comment' 0 %}"
  
   </script>
 {% endblock %}

@@ -14,6 +14,7 @@ urlpatterns = [
     path('comment', new_comment_api, name='new comment'),
     path('delete/comment/<int:pk>/', delete_comment_api, name='delete comment'),
     path('edit/comment/<int:pk>/', edit_comment_api, name='edit comment'),
+    path('reply/comment/<int:pk>/', reply_comment_api, name='reply comment'),
 ]
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -37,31 +37,27 @@ def article_view(request, pk):
     else:
         context = {}
         article = News.objects.get(pk=pk)
-        allcomments = article.comments.filter()
-        print(allcomments)
-        if request.method == "POST":
-            comment_form = NewCommentForm(request.POST)
-            if comment_form.is_valid():
-                user_comment = request.POST['content']
-                parent_comment_pk = request.POST['parent']
-                if parent_comment_pk == '':
-                    comment = Comment(article=article, account=request.user, content=user_comment )
-                else:
-                    parent_comment = Comment.objects.get(pk=parent_comment_pk)
-                    comment = Comment(article=article, parent=parent_comment, account=request.user, content=user_comment )
-                comment.save()
-                comment = Comment.objects.filter(content=user_comment)
-                return HttpResponseRedirect('/article/' + str(pk))
-        else:
-            comment_form = NewCommentForm()
-            comments = Comment.objects.filter(article=article)
-            context = {
-                'article' : article,
-                'comments': comments,
-                'title' : 'Article',
-                'comment_form' : comment_form,
-            }
+        comments = Comment.objects.filter(article=article)
+        context = {'article': article, 'comments': comments, 'title': 'Article'}
     return render(request, 'news/article.html', context)
+
+
+@csrf_exempt
+def reply_comment_api(request, pk):
+    if request.method == "POST" and request.user.is_authenticated:
+        articleID = request.POST['article_id']
+        article = News.objects.get(pk=articleID) # Get the Article object
+        comment_content = request.POST['content']
+        comment = Comment.objects.get(pk=pk) # Get the comment object 
+        child_comment = Comment(article=article, parent=comment, account=request.user, content=comment_content) # Create new child comment 
+        child_comment.save()
+        child_comment_id = child_comment.pk
+        child_comment_date = child_comment.publish
+        data = []
+        data.append(child_comment_id)
+        data.append(child_comment_date)
+    return JsonResponse(data, safe=False) 
+
 
 
 @csrf_exempt        

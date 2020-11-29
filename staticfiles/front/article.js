@@ -142,15 +142,19 @@ function updateCommentsCount(action){
   $('.comments-count').html(number_of_comments_placeholder)
 }
 
+
+// Edit comment Ajax
 $(document).on('click', '#edit_comment', function(){
+  // Removes form if the button is clicked on another comment 
   if(document.contains(document.getElementById('newForm'))){
     $('#newForm').remove();
     $('#close_but').remove();
   }
   var comment_id = $(this).data('id')
-  var comment_row = $(this).parent().parent().parent() // get the comment row for deleteion
+  var comment_row = $(this).parent().parent().parent() // get the comment row
   var comment_content = $('#comment-content-'+ comment_id).text()
   
+  // Append a form to the comment end that you want to edit
   comment_row.append('' +
                 '<button type="button" class="btn btn-outline-secondary mb-3" id="close_but" onclick="formExit()">\
                   <i class="fa fa-times" aria-hidden="true"></i>\
@@ -165,7 +169,7 @@ $(document).on('click', '#edit_comment', function(){
                     <button type="submit" class="btn-outline-dark edit-post-but"><i class="fa fa-edit"></i></button>\
                   </span>\
                 </form>')
-  $(document).on('click', '.edit-post-but', function(e){
+  $(document).on('click', '.edit-post-but', function(e){ 
     e.preventDefault();
     var article_id = $('#like-button').data('id');
     var comment_content = $('#textarea').val();
@@ -184,3 +188,80 @@ $(document).on('click', '#edit_comment', function(){
     })
   })
 })
+
+// Reply to a comment Ajax
+$(document).on('click', '.reply_comment_button', function(){
+
+  if(document.contains(document.getElementById('newForm'))){
+    $('#newForm').remove();
+    $('#close_but').remove();
+  }
+
+  var comment_row = $(this).parent().parent().parent() 
+  var parentID = $(this).data('id')
+  var reply_level = $(this).data('level')
+  var more_replies = "";
+  var node_id = 0;
+  var article_id = 0;
+  if(reply_level < 3) more_replies = '' + 
+                                    '<button id="" class="button reply_comment_button" data-id="'+node_id+ '" data-article="'+ article_id +'">Reply</button>'
+  
+  comment_row.append(' ' + 
+                '<button type="button" class="btn btn-outline-secondary mb-3" id="close_but" onclick="formExit()"> \
+                  <i class="fa fa-times" aria-hidden="true"></i> \
+                </button> \
+                <form id="newForm"  class="input-group text-center" method="post"> \
+                  <select name="parent" class="d-none" id="id_parentt"> \
+                    <option value="' + parentID + '" selected="' + parentID + '"></option> \
+                  </select> \
+                  <textarea class="asd" id="textarea" name="content" cols="40" rows="2"  required id="id_content"></textarea> \
+                  <input type="hidden" name="csrfmiddlewaretoken" value="' + CSRF_TOKEN + '">\ \
+                  <span class="input-group-addon">\
+                    <button type="submit" class="btn-outline-dark reply-post-but"><i class="fa fa-edit"></i></button>\
+                  </span>\
+                </form>')
+
+  $(document).on('click', '.reply-post-but', function(e){
+    e.preventDefault();
+
+    var comment_content = $('#textarea').val(); 
+    var article_id = $('#like-button').data('id');
+    
+    $.ajax({
+      method: 'POST',
+      data: {
+        'content': comment_content,
+        'article_id' : article_id
+      },
+      url: END_POINT_REPLY_TO_COMMENT.replace("0", parentID),
+      success: function(id)
+      {
+
+          node_id = id[0];
+          date_posted = id[1]
+          $('.children-' +parentID).append('' +
+          '<div id="'+node_id+'" class="my-2 p-2 comment">\
+          <a class="pull-left inactiveLink" href="#">\
+            <img class="avatar" height="29" width="35" style="border-radius: 100%;" src="'+ ACCOUNT_PROFILE_PICTURE + '" alt="avatar">\
+          </a>\
+          <div class="comment-body">\
+            <div class="comment-heading">\
+              <div class="user">'+ ACCOUNT_USERNAME +'</div>\
+            </div>\
+            <div id="comment-content-' +node_id + '">'+ comment_content + '</div>\
+            <div class="comment-heading comment_foot">\
+              ' + more_replies +'\
+            | <button id="delete_comment" class="button" data-id="'+ node_id + '" data-article="'+ article_id +'">Delete</button>\
+            | <button id="edit_comment" class="button" data-id="'+ node_id + '" data-article="'+ article_id +'">Edit</button>\
+              <div class="time">'+ date_posted +'</div>\
+            </div>\
+          </div>\
+        </div>\
+          ')  
+          updateCommentsCount("add") // Update comment count 
+          formExit() // close form
+      }
+    })
+  })
+})
+  

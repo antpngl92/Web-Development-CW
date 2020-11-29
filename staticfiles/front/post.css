@@ -138,15 +138,13 @@
   
 }
 
-.post-but, .edit-post-but{
+.post-but, .edit-post-but, .reply-post-but{
   border: 1px solid #ddd !important;
   height: 100%;
   border-top-right-radius: 10px ;
   border-bottom-right-radius: 10px ;
 }
-.post-but, .edit-post-but{
-  border-radius-right: 20px;
-}
+
 
 .blink{
   animation:blinkingText 1.2s infinite;
