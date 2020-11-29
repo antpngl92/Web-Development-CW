@@ -65,7 +65,7 @@
                     </a>
                     <div class="comment-body">
                       <div class="comment-heading">
-                        <div class="user">{{ node.account.username  | capfirst}}</div>
+                        <div class="user">{{ node.account.username  | capfirst}} || Comment ID: {{node.id}}</div>
                       </div>
                       <div id="comment-content-{{node.id}}">{{ node.content }}</div>
                       <div class="comment-heading comment_foot">
@@ -112,6 +112,9 @@
   var END_POINT_NEW_COMMENT = "{% url 'new comment' %}"
   var END_POINT_EDIT_COMMENT = "{% url 'edit comment' 0 %}"
   var END_POINT_REPLY_TO_COMMENT = "{% url 'reply comment' 0 %}"
- 
+  var COMMENT_ID = "{{node.id}}"
+  var CHILDREN_ID = "{{ children.id }}"
+  var CHILDREN = "{{ children }}"
+  
   </script>
 {% endblock %}

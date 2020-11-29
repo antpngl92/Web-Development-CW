@@ -86,11 +86,11 @@ $(document).on('click', '.post-but', function(e){
       </a>\
       <div class="comment-body">\
         <div class="comment-heading">\
-          <div class="user">'+ ACCOUNT_USERNAME +'</div>\
+          <div class="user">'+ ACCOUNT_USERNAME + ' || Comment ID: ' + node_id+'</div>\
         </div>\
         <div id="comment-content-' +node_id + '">'+ comment_content + '</div>\
         <div class="comment-heading comment_foot">\
-          <button id="" class="button reply_comment_button" data-id="'+node_id+ '" data-article="'+ article_id +'">Reply</button>\
+          <button id="" class="button reply_comment_button" data-level="0" data-id="'+node_id+ '" data-article="'+ article_id +'">Reply</button>\
          | <button id="delete_comment" class="button" data-id="'+ node_id + '" data-article="'+ article_id +'">Delete</button>\
          | <button id="edit_comment" class="button" data-id="'+ node_id + '" data-article="'+ article_id +'">Edit</button>\
           <div class="time">'+ date_posted +'</div>\
@@ -198,13 +198,25 @@ $(document).on('click', '.reply_comment_button', function(){
   }
 
   var comment_row = $(this).parent().parent().parent() 
-  var parentID = $(this).data('id')
-  var reply_level = $(this).data('level')
-  var more_replies = "";
-  var node_id = 0;
-  var article_id = 0;
-  if(reply_level < 3) more_replies = '' + 
-                                    '<button id="" class="button reply_comment_button" data-id="'+node_id+ '" data-article="'+ article_id +'">Reply</button>'
+  var comment_id = $(this).data('id')
+  var comment_level = $(this).data('level')
+  var article_id = $(this).data('article')
+
+  console.log(comment_row)
+  console.log(comment_id)
+  console.log(comment_level)
+ 
+
+
+  if(comment_level >= 3) comment_level = 3;
+  else comment_level++;
+
+  var allow_more_replies = "";
+
+  var child_id = 0;
+  
+  if(comment_level < 3) allow_more_replies = '' + 
+                                    '<button id="" class="button reply_comment_button" data-level="' + comment_level +  '" data-id="'+ child_id + '" data-article="'+ article_id +'">Reply</button>'
   
   comment_row.append(' ' + 
                 '<button type="button" class="btn btn-outline-secondary mb-3" id="close_but" onclick="formExit()"> \
@@ -212,20 +224,20 @@ $(document).on('click', '.reply_comment_button', function(){
                 </button> \
                 <form id="newForm"  class="input-group text-center" method="post"> \
                   <select name="parent" class="d-none" id="id_parentt"> \
-                    <option value="' + parentID + '" selected="' + parentID + '"></option> \
+                    <option value="' + comment_id + '" selected="' + comment_id + '"></option> \
                   </select> \
                   <textarea class="asd" id="textarea" name="content" cols="40" rows="2"  required id="id_content"></textarea> \
                   <input type="hidden" name="csrfmiddlewaretoken" value="' + CSRF_TOKEN + '">\ \
                   <span class="input-group-addon">\
-                    <button type="submit" class="btn-outline-dark reply-post-but"><i class="fa fa-edit"></i></button>\
+                    <button id="reply-post-but" type="submit" class="btn-outline-dark "><i class="fa fa-edit"></i></button>\
                   </span>\
                 </form>')
 
-  $(document).on('click', '.reply-post-but', function(e){
+  $(document).on('click', '#reply-post-but', function(e){
+    
     e.preventDefault();
-
-    var comment_content = $('#textarea').val(); 
-    var article_id = $('#like-button').data('id');
+    var comment_content = $('#textarea').val()
+    formExit()
     
     $.ajax({
       method: 'POST',
@@ -233,33 +245,13 @@ $(document).on('click', '.reply_comment_button', function(){
         'content': comment_content,
         'article_id' : article_id
       },
-      url: END_POINT_REPLY_TO_COMMENT.replace("0", parentID),
+      url: END_POINT_REPLY_TO_COMMENT.replace("0", comment_id),
       success: function(id)
       {
 
-          node_id = id[0];
-          date_posted = id[1]
-          $('.children-' +parentID).append('' +
-          '<div id="'+node_id+'" class="my-2 p-2 comment">\
-          <a class="pull-left inactiveLink" href="#">\
-            <img class="avatar" height="29" width="35" style="border-radius: 100%;" src="'+ ACCOUNT_PROFILE_PICTURE + '" alt="avatar">\
-          </a>\
-          <div class="comment-body">\
-            <div class="comment-heading">\
-              <div class="user">'+ ACCOUNT_USERNAME +'</div>\
-            </div>\
-            <div id="comment-content-' +node_id + '">'+ comment_content + '</div>\
-            <div class="comment-heading comment_foot">\
-              ' + more_replies +'\
-            | <button id="delete_comment" class="button" data-id="'+ node_id + '" data-article="'+ article_id +'">Delete</button>\
-            | <button id="edit_comment" class="button" data-id="'+ node_id + '" data-article="'+ article_id +'">Edit</button>\
-              <div class="time">'+ date_posted +'</div>\
-            </div>\
-          </div>\
-        </div>\
-          ')  
-          updateCommentsCount("add") // Update comment count 
-          formExit() // close form
+        
+        updateCommentsCount("add") // Update comment count 
+         // close form
       }
     })
   })
