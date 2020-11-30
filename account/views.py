@@ -5,7 +5,8 @@ from account.forms import RegistrationForm, AccountAuthenticationForm, AccountUp
 from django.views.decorators.csrf import csrf_exempt
 from django.http import QueryDict, JsonResponse
 from django.http import HttpResponseRedirect
-import os 
+from django.core.mail import send_mail
+import os
 
 
 @csrf_exempt
@@ -20,8 +21,10 @@ def registration_view(request):
             form.save()
             username = form.cleaned_data.get('username')
             raw_password = form.cleaned_data.get('password1')
+            email = form.cleaned_data.get('email')
             account = authenticate(username=username,  password=raw_password)
             login(request, account)
+            send_mail('Registration Complete', 'Congratulations! You have successfully registered for our coursework project application! This email serves only to let you know that Part A2 of the Advanced requirements works!', 'newspapergroup43@gmail.com', [email])
             return redirect('news_home')
         else:
             context['registration_form'] = form
@@ -53,9 +56,10 @@ def login_view(request):
                 return redirect('news_home')
     else:
         form = AccountAuthenticationForm()
-        
+
     context['login_form'] = form
     context['title'] = 'Login'
+
     return render(request, 'account/login.html', context)
 
 @csrf_exempt
@@ -67,7 +71,7 @@ def delete_picture_API(request, id):
     user.profile_picture = image
     user.save()
     return JsonResponse({'status':'Deleted!'})
-    
+
 
 @csrf_exempt
 def account_view(request):
@@ -87,7 +91,7 @@ def account_view(request):
                     'username' : request.user.username,
                     'email' : request.user.email,
                     'dob' : request.user.dob,
-                    'favourite' : request.user.favourite.all(), 
+                    'favourite' : request.user.favourite.all(),
                     'profile_picture' : request.user.profile_picture
                 }
             )

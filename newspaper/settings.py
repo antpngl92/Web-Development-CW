@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # OWn Apps:
+    # Own Apps:
     'news',
     'account',
     'comment',
@@ -132,6 +132,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+# Email params
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'newspapergroup43@gmail.com'
+EMAIL_HOST_PASSWORD = '**Group43Rocks3324**'
+EMAIL_USE_TLS = True
+
+
+# Static files
 STATIC_URL = '/staticfiles/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
