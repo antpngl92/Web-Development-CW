@@ -1,5 +1,5 @@
 
-// Like an article 
+// Like an article
 $(document).on('click', '#like-button', function(e){
   var articleID = $(this).data('id');
   $.ajax
@@ -13,7 +13,7 @@ $(document).on('click', '#like-button', function(e){
   });
 });
 
-// Delete profile picture 
+// Delete profile picture
 $(document).on('click', '#delete-button', function(e){
   var userID = $(this).data('id');
   var csrf = $("input[name=csrfmiddlewaretoken]").val();
@@ -26,21 +26,21 @@ $(document).on('click', '#delete-button', function(e){
       $(".profile-picture").html('<img src="/media/profilePic/pp.png" alt="avatar image" height="200" width="200">');
       $("#nav_profile_pic").attr('src', '/media/profilePic/pp.png');
       $(".delete_profile_button").html('<p>You cannot delete your default profile picture</p>');
-        
+
     }
   });
 });
 
 
-// Open form for a new comment 
+// Open form for a new comment
 $(document).on('click','#new_comment_button', function(){
-  
+
   if(document.contains(document.getElementById('newForm'))){
     $('#newForm').remove();
     $('#close_but').remove();
   }
   var parentID = ""
-  $('.new_comment_placeholder').append(' ' + 
+  $('.new_comment_placeholder').append(' ' +
                 '<button type="button" class="btn btn-outline-secondary mb-3" id="close_but" onclick="formExit()"> \
                   <i class="fa fa-times" aria-hidden="true"></i> \
                 </button> \
@@ -54,7 +54,7 @@ $(document).on('click','#new_comment_button', function(){
                     <button type="submit" class="btn-outline-dark post-but"><i class="fa fa-edit"></i></button>\
                   </span>\
                 </form>')
- 
+
 });
 function formExit(){
   $('#newForm').remove();
@@ -64,7 +64,7 @@ function formExit(){
 // Save new comment Ajax
 $(document).on('click', '.post-but', function(e){
   e.preventDefault();
-  var comment_content = $('#textarea').val(); 
+  var comment_content = $('#textarea').val();
   var article_id = $('#like-button').data('id');
 
   $.ajax({
@@ -93,11 +93,15 @@ $(document).on('click', '.post-but', function(e){
          | <button id="delete_comment" class="button" data-id="'+ node_id + '" data-article="'+ article_id +'">Delete</button>\
          | <button id="edit_comment" class="button" data-id="'+ node_id + '" data-article="'+ article_id +'">Edit</button>\
           <div class="time">'+ date_posted +'</div>\
+          <div class="children p1-2 pl-md-5 children-'+node_id+'">\
+          </div>\
         </div>\
       </div>\
     </div>\
-      ')  
-      updateCommentsCount("add") // Update comment count 
+      ')
+
+
+      updateCommentsCount("add") // Update comment count
       formExit() // close form
     }
   })
@@ -105,7 +109,7 @@ $(document).on('click', '.post-but', function(e){
 
 // Delete comment Ajax
 $(document).on('click', '#delete_comment', function(){
-  var articleID = $(this).data('article'); 
+  var articleID = $(this).data('article');
   var commentID = $(this).data('id');
   var comment_row = $(this).parent().parent().parent() // get the comment row for deleteion
   $.ajax({
@@ -116,10 +120,10 @@ $(document).on('click', '#delete_comment', function(){
     url: END_POINT_DELETE_COMMENT.replace("0", commentID),
     success: function(id)
     {
-       comment_row.remove() // remove the commnet roww 
-       updateCommentsCount("sub") // update comments count 
+       comment_row.remove() // remove the commnet roww
+       updateCommentsCount("sub") // update comments count
     }
-  }) 
+  })
 })
 
 
@@ -127,7 +131,7 @@ $(document).on('click', '#delete_comment', function(){
 function updateCommentsCount(action){
 
   var number_of_comments = parseInt(NUMBER_OF_COMMENTS);
-  
+
   if(action == "add") number_of_comments++;
   if(action == "sub") number_of_comments--;
 
@@ -137,14 +141,14 @@ function updateCommentsCount(action){
 
   if(number_of_comments == 1) number_of_comments_placeholder = number_of_comments + " comment"
   else if(number_of_comments == 0) number_of_comments_placeholder = "No comments"
-  
+
   $('.comments-count').html(number_of_comments_placeholder)
 }
 
 
 // Edit comment Ajax
 $(document).on('click', '#edit_comment', function(){
-  // Removes form if the button is clicked on another comment 
+  // Removes form if the button is clicked on another comment
   if(document.contains(document.getElementById('newForm'))){
     $('#newForm').remove();
     $('#close_but').remove();
@@ -152,7 +156,7 @@ $(document).on('click', '#edit_comment', function(){
   var comment_id = $(this).data('id')
   var comment_row = $(this).parent().parent().parent() // get the comment row
   var comment_content = $('#comment-content-'+ comment_id).text()
-  
+
   // Append a form to the comment end that you want to edit
   comment_row.append('' +
                 '<button type="button" class="btn btn-outline-secondary mb-3" id="close_but" onclick="formExit()">\
@@ -168,7 +172,7 @@ $(document).on('click', '#edit_comment', function(){
                     <button type="submit" class="btn-outline-dark edit-post-but"><i class="fa fa-edit"></i></button>\
                   </span>\
                 </form>')
-  $(document).on('click', '.edit-post-but', function(e){ 
+  $(document).on('click', '.edit-post-but', function(e){
     e.preventDefault();
     var article_id = $('#like-button').data('id');
     var comment_content = $('#textarea').val();
@@ -183,7 +187,7 @@ $(document).on('click', '#edit_comment', function(){
       {
         $('#comment-content-' +comment_id).text(comment_content)
         formExit()
-      } 
+      }
     })
   })
 })
@@ -196,11 +200,11 @@ $(document).on('click', '.reply_comment_button', function(){
     $('#close_but').remove();
   }
 
-  var comment_row = $(this).parent().parent().parent() 
+  var comment_row = $(this).parent().parent().parent()
   var comment_id = $(this).data('id')
   var comment_level = $(this).data('level')
-  
-  comment_row.append(' ' + 
+
+  comment_row.append(' ' +
                 '<button type="button" class="btn btn-outline-secondary mb-3" id="close_but" onclick="formExit()"> \
                   <i class="fa fa-times" aria-hidden="true"></i> \
                 </button> \
@@ -216,7 +220,7 @@ $(document).on('click', '.reply_comment_button', function(){
                 </form>')
 })
 $(document).on('click', '#reply-post-but', function(e){
-    
+
   e.preventDefault();
   var comment_content = $('#textarea').val()
   var article_id = $('.reply_comment_button').data('article')
@@ -246,7 +250,7 @@ $(document).on('click', '#reply-post-but', function(e){
       console.log("Child ID: " + child_comment)
       console.log("Child Time: " + child_comment_publish_date)
       var reply_button = create_reply_button(comment_level, child_comment, article_id);
-      $('.children-' + comment_id).append('' + 
+      $('.children-' + comment_id).append('' +
       '<div id="{{ node.id }}" class="my-2 p-2 comment">\
       <a class="pull-left inactiveLink" href="#">\
         <img class="avatar" height="29" width="35" style="border-radius: 100%;"  src="'+ ACCOUNT_PROFILE_PICTURE + '" alt="avatar">\
@@ -267,12 +271,12 @@ $(document).on('click', '#reply-post-but', function(e){
       </div>\
     </div> ')
     formExit()
-    updateCommentsCount("add") // Update comment count 
+    updateCommentsCount("add") // Update comment count
        // close form
     }
   })
 })
-  
+
 function more_reply_levels(current_level){
   if(current_level >= 3) current_level = 3;
   else current_level++;
