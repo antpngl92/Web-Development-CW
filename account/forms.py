@@ -15,6 +15,7 @@ class RegistrationForm(UserCreationForm):
 
 
 class AccountAuthenticationForm(forms.ModelForm):
+    username = forms.CharField(label='Username', widget=forms.TextInput)
     password = forms.CharField(label='Password', widget=forms.PasswordInput)
 
     class Meta:
@@ -23,7 +24,6 @@ class AccountAuthenticationForm(forms.ModelForm):
     
     def clean(self):
         if self.is_valid():
-
             username = self.cleaned_data['username']
             password = self.cleaned_data['password']
             if not authenticate(username=username, password=password):

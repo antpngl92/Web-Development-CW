@@ -49,6 +49,7 @@ def login_view(request):
         form = AccountAuthenticationForm(request.POST)
         if form.is_valid:
             username = request.POST['username']
+            print("=====================+> " + str(username))
             password = request.POST['password']
             user = authenticate(username=username, password=password)
             if user:
