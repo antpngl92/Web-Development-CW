@@ -1,77 +1,52 @@
 {% extends 'news/base.html' %}
 
 {% block content %}
-<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        ...
-      </div>
-    </div>
-  </div>
-  
-<h2>Account</h2>
-<form method="POST" enctype="multipart/form-data">
-{{account_form.non_field_errors}}
-<div class="fieldWrapper">
-    <div class="profile-picture">
-        <img height="200px" width="200px" src="{{ request.user.profile_picture.url }}" alt="Avathar"/>
-    </div>
-    <div class="delete_profile_button">
-        {% if request.user.profile_picture.url == "/media/profilePic/pp.png" %}
-            <p>You cannot delete your default profile picture</p>
-        {% else %}
-            <button type="button" id="delete-button" data-id={{request.user.id}}>Delete</button>
-        {% endif %}
-    </div>
-</div>
-
-<div class="fieldWrapper">
-    {{account_form.profile_picture.errors}}
-    {{account_form.profile_picture}}
-</div>
-<div class="fieldWrapper">
-    {{account_form.username.errors}}
-    <label for="{{account_form.username.id_for_label}}">Username:</label>
-    {{account_form.username}}
-</div>
-<div class="fieldWrapper">
-    {{account_form.email.errors}}
-    <label for="{{account_form.email.id_for_label}}">Email:</label>
-    {{account_form.email}}
-</div>
-<div class="fieldWrapper">
-    {{account_form.favourite.errors}}
-    <label for="{{account_form.favourite.id_for_label}}">News Category:</label>
-    {{account_form.favourite}}
-</div>
-{% csrf_token %}
-<button id="sub_button" type="submit">Save Changes</button>
-</form> 
-<!-- <form method="POST" enctype="multipart/form-data">{% csrf_token %}
-    {{account_form.as_ul}}
-    {% for field in account_form%}
-        <p>
-            {{field.label_tag}}
-            {{field}}
-
-            {% if field.help_text %}
-                <small style='color:grey'>{{field.help_text}}</small>
-            {% endif %}
-
-			{% for error in field.errors %}
-				<p style="color: red;">{{error}}</p>
-            {% endfor %}
-            
-            {% if account_form.non_field_errors  %}
-                <div style="color:red;">
-                    <p>{{account_form.non_field_error}}</p>
-                </div>
-            {% endif %}
-        </p>
-    {% endfor %}
+<div class="a">
+    <form class="form-signin" method="POST" enctype="multipart/form-data"> 
+      <h1 class="h3 md-3 font-weight-normal text-center">Account Settings</h1>
     
-    <img height="200px" width="200px" src="{{ request.user.profile_picture.url }}" alt="Avathar"/>
-    <button type="submit">Save Changes</button>
-</form> -->
+      <div class="fieldWrapper">
+        <div class="profile-picture text-center">
+            <img id="profile_pic_acc"  src="{{ request.user.profile_picture.url }}" alt="profile pic"/>
+        </div>
+        <div class="delete_profile_button text-center mt-3">
+            {% if not request.user.profile_picture.url == "/media/profilePic/pp.png" %}
+                <button type="button" class="btn btn-danger" id="delete-button" data-id={{request.user.id}}>Delete</button>
+            {% endif %}
+        </div>
+    </div>
+    <div class="fieldWrapper mt-5 mb-5">
+        {{account_form.profile_picture}}
+        {{account_form.profile_picture.errors}}
+    </div>
 
+    
+
+      <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" value="{{account_form.initial.username}}" required autofocus>
+      <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" value="{{account_form.initial.email}}" required>
+      
+      <h1 class="h4 mt-5 md-3 mb-5 font-weight-normal text-center">Select your favourite categories:</h1>
+      {% for fav in account_form.favourite%}
+
+      {{fav}} <br>
+
+      {%endfor%}
+
+      {% csrf_token %}
+      {% for field in account_form %}
+        <p>
+          {% for error in field.errors %}
+            <p style="color: red;">{{error}}</p>
+          {% endfor %}
+        </p>
+      {% endfor %}
+      {% if account_form.non_field_errors %}
+        <div style="color: red">
+          <p>{{account_form.non_field_errors}}</p>
+        </div>
+      {% endif %}
+    
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Save Changes</button>
+    </form>
+    </div>
 {% endblock %}

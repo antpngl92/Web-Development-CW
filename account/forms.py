@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from account.models import Account
 from django.contrib.auth import authenticate
+from news.models import Category
 
 class RegistrationForm(UserCreationForm):
     username = forms.CharField(max_length=20, help_text='Required. Add username')
@@ -31,9 +32,14 @@ class AccountAuthenticationForm(forms.ModelForm):
 
 
 class AccountUpdateForm(forms.ModelForm):
+    favourite = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple, queryset=Category.objects.all())
     class Meta:
         model = Account
         fields = ('username', 'email', 'favourite', 'profile_picture')
+        widgets = {'profile_picture':forms.FileInput(
+            attrs={'class':'form-control', 'required': False, 'name':'profile_picture',}
+        )}
+
 
 
     # Make sure that the username and email that user try to change to is not already registered in the DataBase
