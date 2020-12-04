@@ -1,22 +1,35 @@
 {% extends 'news/base.html' %}
 
 {% block content %}
-<h2>Register</h2>
-<form class="form-group" method="POST">
-    {% for field in registration_form%}
-        <p>
-            {{field.label_tag}}
-            {{field}}
-            {% csrf_token %}
-            {% if field.help_text %}
-                <small style='color:grey'>{{field.help_text}}</small>
-            {% endif %}
 
-			{% for error in field.errors %}
-				<p style="color: red;">{{error}}</p>
-			{% endfor %}
+<div class="a">
+    <form class="form-signin" method="POST" enctype="multipart/form-data"> 
+      <h1 class="h3 md-3 font-weight-normal text-center">Register</h1>
+    
+      <input type="text" name="username" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+      <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required>
+      <input type="password" name="password1" id="inputPassword1" class="form-control" placeholder="Password" required>
+      <input type="password" name="password2" id="inputPassword2" class="form-control" placeholder="Confirm password" required>
+
+      <label for="dob">Date of Birth:</label>
+      <input type="date" name="dob" id="inputDob" class="form-control" placeholder="Date of birth" value="dob"required>
+    
+
+      {% csrf_token %}
+      {% for field in registration_form %}
+        <p>
+          {% for error in field.errors %}
+            <p style="color: red;">{{error}}</p>
+          {% endfor %}
         </p>
-    {% endfor %}
-    <button type="submit">Register</button>
-</form>
+      {% endfor %}
+      {% if registration_form.non_field_errors %}
+        <div style="color: red">
+          <p>{{registration_form.non_field_errors}}</p>
+        </div>
+      {% endif %}
+    
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+    </form>
+    </div>
 {% endblock %}
