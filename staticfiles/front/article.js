@@ -95,7 +95,7 @@ $(document).on('click', '.post-but', function(e){
       </a>\
       <div class="comment-body">\
         <div class="comment-heading">\
-          <div class="user">'+ ACCOUNT_USERNAME + ' || Comment ID: ' + node_id+'</div>\
+          <div class="user">'+ ACCOUNT_USERNAME +'</div>\
         </div>\
         <div id="comment-content-' +node_id + '">'+ comment_content + '</div>\
         <div class="comment-heading comment_foot">\
@@ -278,7 +278,7 @@ $(document).on('click', '#reply-post-but', function(e){
       </a>\
       <div class="comment-body">\
         <div class="comment-heading">\
-          <div class="user">'+ ACCOUNT_USERNAME + ' || Comment ID: ' + child_comment +'</div>\
+          <div class="user">'+ ACCOUNT_USERNAME +'</div>\
         </div>\
         <div id="comment-content-' + child_comment + '">'+ comment_content + '</div>\
         <div class="comment-heading comment_foot">\
