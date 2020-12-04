@@ -8,6 +8,7 @@ from django.http import QueryDict, JsonResponse, HttpResponse, HttpResponseRedir
 from account.models import Account
 from comment.models import Comment 
 from comment.form import NewCommentForm
+from django.contrib.auth.decorators import login_required
 
 
 def home(request):
@@ -31,18 +32,15 @@ def home(request):
             }
     return render(request, 'news/news.html', context)
 
+@login_required
 def article_view(request, pk):
-    if not request.user.is_authenticated:
-        return redirect('login')
-    else:
-        context = {}
-        article = News.objects.get(pk=pk)
-        comments = Comment.objects.filter(article=article)
-        context = {'article': article, 'comments': comments, 'title': 'Article'}
+    context = {}
+    article = News.objects.get(pk=pk)
+    comments = Comment.objects.filter(article=article)
+    context = {'article': article, 'comments': comments, 'title': 'Article'}
     return render(request, 'news/article.html', context)
 
 
-@csrf_exempt
 def reply_comment_api(request, pk):
     if request.method == "POST" and request.user.is_authenticated:
         articleID = request.POST['article_id']
@@ -59,8 +57,7 @@ def reply_comment_api(request, pk):
     return JsonResponse(data, safe=False) 
 
 
-
-@csrf_exempt        
+      
 def new_comment_api(request):
     if request.method == "POST" and request.user.is_authenticated:
         articleID = request.POST['article_id']
@@ -75,7 +72,6 @@ def new_comment_api(request):
         data.append(new_comment_date)
     return JsonResponse(data, safe=False)
 
-@csrf_exempt
 def edit_comment_api(request, pk):
     if request.method == "PUT" and request.user.is_authenticated:
         data = QueryDict(request.body)
@@ -91,7 +87,7 @@ def edit_comment_api(request, pk):
     return JsonResponse({'status': 'Saved'})
 
 
-@csrf_exempt
+
 def delete_comment_api(request, pk):
     if request.method == "DELETE" and request.user.is_authenticated:
         comment = Comment.objects.get(pk=pk)
@@ -99,7 +95,7 @@ def delete_comment_api(request, pk):
     return JsonResponse("success", safe=False)    
 
 
-@csrf_exempt
+
 def like(request, pk):
     if request.method == "POST" and request.user.is_authenticated:
         user = request.user
@@ -115,19 +111,3 @@ def like(request, pk):
 
         return JsonResponse({'currentLikes': article.likes}, status=200)
 
-@csrf_exempt
-def get_cat_API(reqest):
-    if reqest.method == "GET":
-        data = Category.objects.all()
-        serialized_object = serializers.serialize('python', data)
-        return JsonResponse(serialized_object, safe=False)
-
-@csrf_exempt
-def get_cat_API(reqest):
-    if reqest.method == "GET":
-        data = Category.objects.all()
-        serialized_object = serializers.serialize('python', data)
-        return JsonResponse(serialized_object, safe=False)
-    if request.method == "POST":
-        news = request.POST.getlist('cat')
-        print(news)

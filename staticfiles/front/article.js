@@ -2,10 +2,14 @@
 // Like an article
 $(document).on('click', '#like-button', function(e){
   var articleID = $(this).data('id');
+  var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
   $.ajax
   ({
     method: 'POST',
     url: END_POINT_LIKE.replace("0", articleID),
+    beforeSend: function (xhr){
+      xhr.setRequestHeader('X-CSRFToken', csrftoken);
+    },
     success: function(data)
     {
       $('#' + articleID).html(data.currentLikes);
@@ -16,11 +20,14 @@ $(document).on('click', '#like-button', function(e){
 // Delete profile picture
 $(document).on('click', '#delete-button', function(e){
   var userID = $(this).data('id');
-  var csrf = $("input[name=csrfmiddlewaretoken]").val();
+  var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
   $.ajax
   ({
     method: 'DELETE',
     url: 'delete/0/'.replace('0', userID),
+    beforeSend: function (xhr){
+      xhr.setRequestHeader('X-CSRFToken', csrftoken);
+    },
     success: function(data)
     {
       $(".profile-picture").html('<img src="/media/profilePic/pp.png" alt="avatar image" height="200" width="200">');
@@ -32,7 +39,7 @@ $(document).on('click', '#delete-button', function(e){
 });
 
 
-// Open form for a new comment
+// Create new comment - 1.Open form for a new comment
 $(document).on('click','#new_comment_button', function(){
 
   if(document.contains(document.getElementById('newForm'))){
@@ -61,12 +68,12 @@ function formExit(){
   $('#close_but').remove();
 }
 
-// Save new comment Ajax
+// Create new comment - 2.Save new comment
 $(document).on('click', '.post-but', function(e){
   e.preventDefault();
   var comment_content = $('#textarea').val();
   var article_id = $('#like-button').data('id');
-
+  var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
   $.ajax({
     method: 'POST',
     data: {
@@ -74,6 +81,9 @@ $(document).on('click', '.post-but', function(e){
       'article_id' : article_id
     },
     url: END_POINT_NEW_COMMENT,
+    beforeSend: function (xhr){
+      xhr.setRequestHeader('X-CSRFToken', csrftoken);
+    },
     success: function(id)
     {
       node_id = id[0];
@@ -112,12 +122,16 @@ $(document).on('click', '#delete_comment', function(){
   var articleID = $(this).data('article');
   var commentID = $(this).data('id');
   var comment_row = $(this).parent().parent().parent() // get the comment row for deleteion
+  var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
   $.ajax({
     method: 'DELETE',
     data: {
       'articleID': articleID
     },
     url: END_POINT_DELETE_COMMENT.replace("0", commentID),
+    beforeSend: function (xhr){
+      xhr.setRequestHeader('X-CSRFToken', csrftoken);
+    },
     success: function(id)
     {
        comment_row.remove() // remove the commnet roww
@@ -176,6 +190,7 @@ $(document).on('click', '#edit_comment', function(){
     e.preventDefault();
     var article_id = $('#like-button').data('id');
     var comment_content = $('#textarea').val();
+    var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
     $.ajax({
       method: 'PUT',
       data: {
@@ -183,6 +198,9 @@ $(document).on('click', '#edit_comment', function(){
         'article_id' : article_id
       },
       url: END_POINT_EDIT_COMMENT.replace("0", comment_id),
+      beforeSend: function (xhr){
+        xhr.setRequestHeader('X-CSRFToken', csrftoken);
+      },
       success: function(id)
       {
         $('#comment-content-' +comment_id).text(comment_content)
@@ -233,7 +251,7 @@ $(document).on('click', '#reply-post-but', function(e){
   console.log("Comment ID: " + comment_id)
   console.log("Comment Lvl: " + comment_level)
   console.log("Comment content: " + comment_content)
-
+  var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
   formExit()
   $.ajax({
     method: 'POST',
@@ -242,6 +260,9 @@ $(document).on('click', '#reply-post-but', function(e){
       'article_id' : article_id
     },
     url: END_POINT_REPLY_TO_COMMENT.replace("0", comment_id),
+    beforeSend: function (xhr){
+      xhr.setRequestHeader('X-CSRFToken', csrftoken);
+    },
     success: function(id)
     {
       var child_comment = id[0]

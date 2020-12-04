@@ -2,9 +2,9 @@
 
 {% block content %}
 <div class="a">
-    <form class="form-signin" method="POST" enctype="multipart/form-data"> 
+    <form class="form-signin" method="POST" enctype="multipart/form-data"> {% csrf_token %}
       <h1 class="h3 md-3 font-weight-normal text-center">Account Settings</h1>
-    
+
       <div class="fieldWrapper">
         <div class="profile-picture text-center">
             <img id="profile_pic_acc"  src="{{ request.user.profile_picture.url }}" alt="profile pic"/>
@@ -15,6 +15,7 @@
             {% endif %}
         </div>
     </div>
+
     <div class="fieldWrapper mt-5 mb-5">
         {{account_form.profile_picture}}
         {{account_form.profile_picture.errors}}
@@ -32,7 +33,7 @@
 
       {%endfor%}
 
-      {% csrf_token %}
+      
       {% for field in account_form %}
         <p>
           {% for error in field.errors %}
@@ -49,4 +50,8 @@
       <button class="btn btn-lg btn-primary btn-block" type="submit">Save Changes</button>
     </form>
     </div>
+
+<script>
+    var CSRF_TOKEN = '{{ csrf_token }}'
+</script>
 {% endblock %}

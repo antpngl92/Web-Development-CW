@@ -1,7 +1,7 @@
 {% extends 'news/base.html' %}
 
 {% block content %}
-
+{%csrf_token%}
   <div class="card mb-5" style="margin-top: 100px !important;">
     <div class="card-body">
       <h3 class="text-center san">{{ article.category }}</h3>
@@ -115,6 +115,5 @@
   var COMMENT_ID = "{{node.id}}"
   var CHILDREN_ID = "{{ children.id }}"
   var CHILDREN = "{{ children }}"
-  
   </script>
 {% endblock %}

@@ -1,6 +1,6 @@
 
 from django.urls import path
-from news.views import (home, get_cat_API)
+from news.views import (home) #get_cat_API
 from .views import *
 from newspaper import settings
 from django.contrib.staticfiles.urls import static
@@ -8,7 +8,6 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('' ,home, name='news_home'),
-    path('get_news_API/', get_cat_API, name="get_news_api"),
     path('like/<int:pk>/', like, name="like"),
     path('article/<int:pk>/', article_view, name='article'),
     path('comment', new_comment_api, name='new comment'),

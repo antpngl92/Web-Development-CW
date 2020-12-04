@@ -61,6 +61,7 @@ MIDDLEWARE = [
 
 
 ROOT_URLCONF = 'newspaper.urls'
+LOGIN_URL = '/account/login/'
 
 TEMPLATES = [
     {

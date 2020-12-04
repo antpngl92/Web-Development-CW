@@ -7,14 +7,14 @@ from django.http import QueryDict, JsonResponse
 from django.http import HttpResponseRedirect
 from django.core.mail import send_mail
 import os
+from django.contrib.auth.decorators import login_required
 
 
-@csrf_exempt
 def registration_view(request):
     user = request.user
+    context = {}
     if user.is_authenticated:
         return redirect('news_home')
-    context = {}
     if request.POST:
         form = RegistrationForm(request.POST)
         if form.is_valid():
@@ -39,7 +39,7 @@ def logout_view(request):
     logout(request)
     return redirect('login')
 
-@csrf_exempt
+
 def login_view(request):
     context = {}
     user = request.user
@@ -49,7 +49,6 @@ def login_view(request):
         form = AccountAuthenticationForm(request.POST)
         if form.is_valid:
             username = request.POST['username']
-            print("=====================+> " + str(username))
             password = request.POST['password']
             user = authenticate(username=username, password=password)
             if user:
@@ -63,7 +62,7 @@ def login_view(request):
 
     return render(request, 'account/login.html', context)
 
-@csrf_exempt
+
 def delete_picture_API(request, id):
     user = request.user
     current_image = user.profile_picture
@@ -74,27 +73,24 @@ def delete_picture_API(request, id):
     return JsonResponse({'status':'Deleted!'})
 
 
-@csrf_exempt
+@login_required
 def account_view(request):
     context = {}
-    if not request.user.is_authenticated:
-        return redirect('login')
+    categories = request.user.favourite.all()
+    if request.POST:
+        form = AccountUpdateForm(request.POST, request.FILES, request.FILES, instance = request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('account')
     else:
-        categories = request.user.favourite.all()
-        if request.POST:
-            form = AccountUpdateForm(request.POST, request.FILES, request.FILES, instance = request.user)
-            if form.is_valid():
-                form.save()
-                return redirect('account')
-        else:
-            form = AccountUpdateForm(
-                initial = {
-                    'username' : request.user.username,
-                    'email' : request.user.email,
-                    'dob' : request.user.dob,
-                    'favourite' : request.user.favourite.all(),
-                    'profile_picture' : request.user.profile_picture
-                }
-            )
-        context['account_form'] = form
+        form = AccountUpdateForm(
+            initial = {
+                'username' : request.user.username,
+                'email' : request.user.email,
+                'dob' : request.user.dob,
+                'favourite' : request.user.favourite.all(),
+                'profile_picture' : request.user.profile_picture
+            }
+        )
+    context['account_form'] = form
     return render(request, 'account/account.html', context)
