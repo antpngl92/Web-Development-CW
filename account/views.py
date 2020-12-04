@@ -24,7 +24,7 @@ def registration_view(request):
             email = form.cleaned_data.get('email')
             account = authenticate(username=username,  password=raw_password)
             login(request, account)
-            send_mail('Registration Complete', 'Congratulations! You have successfully registered for our coursework project application! This email serves only to let you know that Part A2 of the Advanced requirements works!', 'newspapergroup43@gmail.com', [email])
+            send_mail('Registration Complete', 'Congratulations ' + username + '! You have successfully registered for our coursework project application! This email serves only to let you know that Part A2 of the Advanced requirements works!', 'newspapergroup43@gmail.com', [email])
             return redirect('news_home')
         else:
             context['registration_form'] = form
