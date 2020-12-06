@@ -1,4 +1,4 @@
- 
+
  <nav class="navbar navbar-expand-lg navbar-dark navvv bg-dark mb-5">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -11,13 +11,13 @@
       </li>
       {% for cat in categories%}
         <li class="nav-item">
-          <a class="nav-link text-center" href="#">{{cat.name | upper }}</a>
+          <a class="nav-link text-center" href="#{{cat.name}}">{{cat.name | upper }}</a>
         </li>
-  
+
       {% endfor %}
       </ul>
       <!--END LEFT SIDE NAVBAR -->
-      
+
        <!--RIGHT SIDE NAVBAR -->
       {% if request.user.is_authenticated %}
       <table class="navbar-nav">
@@ -32,7 +32,6 @@
           </td>
           <td>
             <img id="nav_profile_pic"src="{{user.profile_picture.url}}" alt="avatar image" height="29" width="35" style="border-radius: 100%;">
-            </div>
           </td>
         </tr>
       </table>

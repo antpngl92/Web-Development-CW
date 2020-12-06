@@ -4,13 +4,13 @@
 {% if not categories%}
   <div class="card mt-5">
     <div class="card-body">
-      <h2 class="text-center san  blink">You need to go into your account settings and add some categories in orther to
-        see news articles!</h1>
+      <h2 class="text-center san  blink">You need to go into your account settings and add some categories in order to
+        see news articles!</h2>
     </div>
   </div>
 {%else%}
   {% for category in categories%}
-  <div class="card" style="margin-top: 100px !important;">
+  <div class="card" style="margin-top: 100px !important;" id="{{ category.name }}">
     <div class="card-body">
       <h3 class="text-center san">{{ category }}</h3>
       <div class="row mt-5 ">
