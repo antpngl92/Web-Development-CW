@@ -1,0 +1,96 @@
+[
+    {
+        "model": "account.account",
+        "pk": 1,
+        "fields": {
+            "password": "pbkdf2_sha256$216000$o6a1oxB0Xzhz$1VlN0uf9wN2nA2gPzkoQcoSYrmrUUcUoJuvK4fCptxs=",
+            "username": "user",
+            "email": "user@gmail.com",
+            "dob": null,
+            "profile_picture": "profilePic/user.png",
+            "date_joined": "2020-12-06T02:17:18.479Z",
+            "last_login": "2020-12-06T03:10:15.709Z",
+            "is_admin": true,
+            "is_active": true,
+            "is_staff": true,
+            "is_superuser": true,
+            "favourite": [
+                2,
+                1,
+                3,
+                4
+            ],
+            "likes": [
+                1,
+                3,
+                4,
+                7,
+                8,
+                9,
+                10,
+                11,
+                5,
+                6,
+                2,
+                12
+            ]
+        }
+    },
+    {
+        "model": "account.account",
+        "pk": 2,
+        "fields": {
+            "password": "pbkdf2_sha256$216000$VosVAQpSOK52$TA7JPtVQ0BiFE7exe0ohQBtr3IT53xjZralxlyvKCuE=",
+            "username": "user2",
+            "email": "user2@gmail.com",
+            "dob": null,
+            "profile_picture": "profilePic/user2.jpg",
+            "date_joined": "2020-12-06T02:31:57.338Z",
+            "last_login": "2020-12-06T03:10:33.276Z",
+            "is_admin": true,
+            "is_active": true,
+            "is_staff": true,
+            "is_superuser": true,
+            "favourite": [
+                4
+            ],
+            "likes": [
+                1,
+                3,
+                7,
+                8,
+                9,
+                2
+            ]
+        }
+    },
+    {
+        "model": "account.account",
+        "pk": 3,
+        "fields": {
+            "password": "pbkdf2_sha256$216000$5PQS27IfwFTl$BG1r+QEPYYSSQAGHwPE/2sjiJPxTJV52Znmbs1wxcS8=",
+            "username": "user3",
+            "email": "user3@gmail.com",
+            "dob": null,
+            "profile_picture": "profilePic/user3.jpg",
+            "date_joined": "2020-12-06T02:32:17.265Z",
+            "last_login": "2020-12-06T02:38:26.183Z",
+            "is_admin": true,
+            "is_active": true,
+            "is_staff": true,
+            "is_superuser": true,
+            "favourite": [
+                1,
+                3
+            ],
+            "likes": [
+                4,
+                7,
+                8,
+                9,
+                5,
+                6
+            ]
+        }
+    }
+]

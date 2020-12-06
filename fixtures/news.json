@@ -1,0 +1,146 @@
+[
+    {
+        "model": "news.news",
+        "pk": 1,
+        "fields": {
+            "title": "How Empathy Has Changed In The Face Of Technology",
+            "content": "We often think about the impact of technology and increased screen time on the individual, but what about communities? Of course physical devices separate us physically, and this excerpt from Kaitlin Ugolick Phillips‘ The Future of Feeling: Building Empathy in a Tech-Obsessed World asserts that they’re actually harming children’s ability to talk to one another. Let’s make staying connected – in all ways – a top priority.\r\nWe obviously don’t have self-reported empathy scores from everyone who regularly uses social or immersive technology, but it’s hard to deny that there are few better places to see ‘need for approval‘ on display than the platforms that keep people coming back for more ‘likes’ and ‘shares.’ This is the trait that products like Instagram, Facebook, and Twitter are built to exploit; every little notification and validation is like a small neurological treat, literally releasing dopamine, the ‘reward’ chemical. Social technology is ostensibly about connecting people, but it doesn’t often foster the empathy that’s needed for real human connection. This problem is hard to quantify, but it’s showing up in homes, offices, and classrooms around the country.",
+            "date": "2020-12-06",
+            "category": 2,
+            "image": "gallery/2-boy-sitting-on-brown-floor-while-using-their-smartphone-159395-1400x1092.jpg",
+            "likes": 2
+        }
+    },
+    {
+        "model": "news.news",
+        "pk": 2,
+        "fields": {
+            "title": "Quibi: Why did the video app go so wrong",
+            "content": "Quibi pulled the plug on its video-streaming service this week, capping an extraordinary year for the company.\r\n\r\nAt the start of 2020, it was seen by some as the future of \"snackable\" smartphone entertainment.\r\n\r\nShows were shot so they could be watched full-screen in both portrait and landscape mode, with users able to switch with a turn of their handset.\r\n\r\nAnd the firm spent hundreds of million of dollars of the near $2bn (£1.5bn) it had raised to create an library of exclusive short, bite-sized content.\r\n\r\nMany media companies signed up, including the BBC, which had its own news show on the platform.\r\n\r\nBut somewhere along the way things went very wrong.",
+            "date": "2020-12-04",
+            "category": 2,
+            "image": "gallery/_115773044_quib1.jpg",
+            "likes": 2
+        }
+    },
+    {
+        "model": "news.news",
+        "pk": 3,
+        "fields": {
+            "title": "Timnit Gebru: Google staff rally behind fired AI researcher",
+            "content": "Hundreds of Google staff have signed a letter backing a leading AI ethics researcher who was sacked by Google.\r\n\r\nTimnit Gebru says she was fired after sending an internal email that accused Google of \"silencing marginalised voices\".\r\n\r\nHundreds of colleagues have signed a letter accusing the search giant of racism and censorship, while Twitter users have rallied around Dr Gebru using the hashtag #BelieveBlackWomen.\r\n\r\nGoogle disputes her version of events.\r\n\r\nDr Gebru is a well-respected researcher in the field of ethics and the use of artificial intelligence.\r\n\r\nShe is well-known for her work on racial bias in technology such as facial recognition, and has criticised systems that fail to recognise black faces.",
+            "date": "2020-12-06",
+            "category": 2,
+            "image": "gallery/_115796989_gettyimages-1028811892.jpg",
+            "likes": 2
+        }
+    },
+    {
+        "model": "news.news",
+        "pk": 4,
+        "fields": {
+            "title": "Chelsea welcome fans back in style",
+            "content": "There were scenes of celebration after the final whistle as Blues boss Frank Lampard went over to applaud fans inside the ground, who gave the players a standing ovation while they headed for the dressing room.\r\n\r\nOne supporter held up a banner which read \"It's great to be back\" and Chelsea certainly relished the occasion as they turned on the style.\r\n\r\nWhen they last moved to the summit after a win at Newcastle on 21 November, Lampard said he was not going to \"get excited about being top for five minutes\".\r\n\r\nWithin a few hours they had been replaced by Tottenham following a win over Manchester City later the same day.",
+            "date": "2020-12-06",
+            "category": 1,
+            "image": "gallery/_115813095_shutterstock_editorial_11188940w.jpg",
+            "likes": 2
+        }
+    },
+    {
+        "model": "news.news",
+        "pk": 5,
+        "fields": {
+            "title": "Sakhir Grand Prix: Mercedes 'impressed but not surprised'",
+            "content": "Mercedes team boss Toto Wolff said he had been \"impressed but not surprised\" by the accomplished performance George Russell has produced so far as he stood in for Lewis Hamilton at the Sakhir Grand Prix.\r\n\r\nThe 22-year-old Briton came within 0.026 seconds of taking pole position on his debut for Mercedes, and in so doing confirmed a status he already enjoyed in many minds in Formula 1 as a star of the future.\r\n\r\nAnd befitting a driver of such obvious talent, Russell admitted to being \"gutted\" at being so near and yet so far from beating team-mate Valtteri Bottas to pole position around Bahrain's short outer circuit.\r\n\r\n\"In some ways being so close makes it really frustrating,\" Russell said, \"but if you had told me four days ago I would be P2 this weekend I would think you were pulling my pants down.\"",
+            "date": "2020-12-05",
+            "category": 1,
+            "image": "gallery/_115812930_russellepa.jpg",
+            "likes": 2
+        }
+    },
+    {
+        "model": "news.news",
+        "pk": 6,
+        "fields": {
+            "title": "Wayne Rooney says booing of players taking a knee 'disappointing and upsetting'",
+            "content": "Derby boss Wayne Rooney said it was \"disappointing and upsetting\" to hear some Millwall fans boo players taking a knee at the start of Saturday's Championship match.\r\n\r\nThe Den was able to host 2,000 fans for the first time this season after the second national lockdown was lifted.\r\n\r\nHowever, the return of spectators was overshadowed by the pre-match incident.\r\n\r\n\"To hear that is very disappointing and upsetting for a lot of people,\" said Rooney, whose side won the game 1-0.\r\n\r\n\"I'm pleased with how my team dealt with that. They've had to put that to the back of their minds for the 90 minutes but I'm sure it's something they were thinking about.\"\r\n\r\nThe Football Association and anti-discrimination body Kick It Out have condemned the booing, while Derby forward Colin Kazim-Richards described the incident as \"an absolute disgrace\".\r\n\r\nPlayers, officials and staff at Premier League and English Football League games have been taking a knee pre-match since football restarted in June in order to show their support for the Black Lives Matter movement for racial equality.",
+            "date": "2020-12-05",
+            "category": 1,
+            "image": "gallery/_115811209_gettyimages-1289573054.jpg",
+            "likes": 2
+        }
+    },
+    {
+        "model": "news.news",
+        "pk": 7,
+        "fields": {
+            "title": "Brexit: UK-EU trade talks to resume over 'critical issues'",
+            "content": "The UK and EU have decided to return to the negotiating table to try to agree a post-Brexit trade deal, despite \"significant differences\".\r\n\r\nUK Prime Minister Boris Johnson and European Commission president Ursula von der Leyen made the decision during a phone call on Saturday.\r\n\r\nA statement said there were three \"critical issues\" to address.\r\n\r\nNegotiating teams will reconvene in Brussels on Sunday, and the leaders will speak again on Monday evening.\r\n\r\nIn the joint statement from Mr Johnson and Ms Von der Leyen, they said fishing rights, competition rules and how any deal is enforced were still causing problems, with the statement adding: \"Both sides underlined that no agreement is feasible if these issues are not resolved.\"\r\n\r\nBut the leaders continued: \"Whilst recognising the seriousness of these differences, we agreed that a further effort should be undertaken by our negotiating teams to assess whether they can be resolved.\"\r\n\r\nThe BBC's political editor, Laura Kuenssberg, said the next meeting \"feels like a last roll of the dice, rather than ironing out a few last minute glitches\", and the next 48 hours would be \"critical\".",
+            "date": "2020-12-06",
+            "category": 3,
+            "image": "gallery/_115812364_4a6f5c9c-5e62-4ad4-9547-d21b876625db.jpg",
+            "likes": 3
+        }
+    },
+    {
+        "model": "news.news",
+        "pk": 8,
+        "fields": {
+            "title": "Liverpool mayor Joe Anderson bailed in bribery inquiry",
+            "content": "Liverpool mayor Joe Anderson has been released on bail after being arrested by police investigating claims of bribery and witness intimidation.\r\n\r\nHe was held with four other men as part of an investigation into the awarding of building contracts in the city.\r\n\r\nThe Labour Party has suspended Mr Anderson pending the outcome of the case.\r\n\r\nMerseyside Police said all five people \"have been released on condition bail, pending further inquiries.\"\r\n\r\nTheir year-long investigation, Operation Aloft, has focused on a number of property developers.\r\n\r\nOn Friday, Mr Anderson, 62, was arrested on suspicion of conspiracy to commit bribery and witness intimidation.",
+            "date": "2020-12-06",
+            "category": 3,
+            "image": "gallery/_114949736_ja-nc.jpg",
+            "likes": 3
+        }
+    },
+    {
+        "model": "news.news",
+        "pk": 9,
+        "fields": {
+            "title": "Jamaica flight: Priti Patel criticises anti-deportation campaign",
+            "content": "Priti Patel has criticised Labour MPs and celebrities for invoking the Windrush scandal in their efforts to stop a flight deporting convicted criminals to Jamaica.\r\n\r\nThe plane containing 13 prisoners took off on Wednesday - 23 were left off it following legal challenges.\r\n\r\nCampaigners said there was a risk people were being wrongly removed as had happened in the Windrush scandal.\r\n\r\nThe home secretary said their reference to Windrush was \"deeply offensive\".\r\n\r\nShe told the Daily Mail that it was \"misjudged and upsetting\" for \"ill-informed Labour politicians and do-gooding celebrities\" to invoke it in their campaign.\r\n\r\nThe Windrush scandal, which emerged in 2018, saw people who came to the UK from Commonwealth countries wrongly told they were in the country illegally.\r\n\r\nWho are the Windrush generation?\r\nCall to review foreign-born offender deportations\r\nUK 'unlawfully ignored' Windrush warnings\r\nIt was cited in an open letter last month, signed by 90 public figures, including model Naomi Campbell and actress Thandie Newton.\r\n\r\nWarning that issues linked to Windrush have \"not been resolved,\" they argued the planned deportation flight brought \"credible risks of unlawful and wrongful deportations\" and urged airlines to boycott it.\r\n\r\nThe campaigners warned the UK \"frequently\" seeks to deport people whose crimes are linked to forced labour, and processes for identifying victims of trafficking were in \"disarray\".\r\n\r\nA separate letter last month signed by over 60 mostly Labour MPs and peers also called for the flight to be cancelled.",
+            "date": "2020-12-06",
+            "category": 3,
+            "image": "gallery/_115802176_patelpamedia.jpg",
+            "likes": 3
+        }
+    },
+    {
+        "model": "news.news",
+        "pk": 10,
+        "fields": {
+            "title": "'I was a stage manager and now I'm a bike mechanic'",
+            "content": "My Money is a series looking at how people spend their money - and the sometimes tough decisions they have to make. Here, Laura Wilson, 33, from west London takes us through her week's spending.\r\n\r\nLaura has been a theatre stage manager for 15 years in London and on tour. During lockdown she has been slowly retraining to be a bicycle mechanic and loves it. She also loves cycling, yoga and reading and is normally found curled up in an armchair reading a book.\r\n\r\nShe also says she is a dreadful baker but persists, despite most things being rendered inedible.\r\n\r\nThe theatre Laura works at was closed during lockdown but opened in August until the second lockdown. It was running small shows whilst it was open to socially-distanced audiences.\r\n\r\nLaura started her blog on Monday 2 November 2020.",
+            "date": "2020-12-06",
+            "category": 4,
+            "image": "gallery/_115560983_img_1718.jpg",
+            "likes": 1
+        }
+    },
+    {
+        "model": "news.news",
+        "pk": 11,
+        "fields": {
+            "title": "Covid: Can we rescue the office Christmas party this year?",
+            "content": "\"This is the year to do this, if there was ever a year,\" says Helen Lacey. \"I know everybody's 'Zoomed' out, but this will be a little bit different.\"\r\n\r\nHelen is the creative director at Enact Solutions, a drama-based training company in Huddersfield.\r\n\r\nThis time last year one of its regular actors, Tam Ryan, was appearing as Buddy in Elf - the Musical, in Manchester. But this season, along with fellow actor and comedian Marvin Dickinson, he will be the host of \"Virtual Shindig\", a live-streamed office Christmas party.\r\n\r\nVirtual Shindig promises companies a bespoke panto-style show with a sprinkling of in-jokes, sketches (who knew England's chief medical officer Prof Chris Whitty was such an accomplished rapper?), songs, Mastermind-style quizzes and awards for team members.",
+            "date": "2020-12-06",
+            "category": 4,
+            "image": "gallery/_115514658_christmasparty.jpg",
+            "likes": 1
+        }
+    },
+    {
+        "model": "news.news",
+        "pk": 12,
+        "fields": {
+            "title": "Should you tip the takeaway delivery driver?",
+            "content": "The volume of takeaway food deliveries has soared this year as the pandemic has closed restaurants. But should you tip the delivery driver? We take a look at the correct etiquette on your doorstep.\r\n\r\nJonathan Clarke says that about a quarter of households will give him a tip.\r\n\r\nThe classical musician started delivering food by bicycle for the Deliveroo app in the summer.\r\n\r\nHe took the job after a number of his concerts were cancelled because of Covid. \"The reality was that I'd lost the majority of my income,\" says the 43-year-old.\r\n\r\n\"And I love cycling, so Deliveroo seemed the obvious thing to do.\"",
+            "date": "2020-11-11",
+            "category": 4,
+            "image": "gallery/_114943633_9e8667d9-caf0-4010-8489-8eff38213304.jpg",
+            "likes": 1
+        }
+    }
+]
