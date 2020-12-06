@@ -2,10 +2,10 @@
 
 GROUP 43:
 * Adrian-Gabriel Aduculesei - ec18123@qmul.ac.uk:
-** Implemented account model, user authentication, article model, articles ajax like, email notification, 
+  Implemented account model, user authentication, article model, articles ajax like, email notification, 
 
 * Anton Petrov Nyagolov - ec18201@qmul.ac.uk:
-**  Implemented accoutn settings, categories and comments models, profile picture, post/edit/delete/new ajax coment, testing
+  Implemented accoutn settings, categories and comments models, profile picture, post/edit/delete/new ajax coment, testing
 
 
 Test users:
