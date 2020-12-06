@@ -19,6 +19,9 @@ Deployed on: https://mygroup43-mygroup43.apps.okd.eecs.qmul.ac.uk/
 Current Chromedriver is provided for Chrome version 87
 There is no need to download chrome driver as it is automatically picked for you by te test scripts
 
+
+# Instructions: 
+
 This project has been created under Conda virtual environment : https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html
 
 Assuming you have conda installed:
@@ -29,9 +32,6 @@ Assuming you have conda installed:
 
 3) Install pip package: conda install pip
 
-4) Install django within the enc: pip install django
-
-5) CD into the project folder and type python manage.py runserver to run the project
-
+4) install all the modules from the requirements.txt file by ```py pip install -r requirements.txt```
 
 
