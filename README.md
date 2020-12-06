@@ -1,4 +1,5 @@
 # GROUP 43
+Students: 
 * Adrian-Gabriel Aduculesei - ec18123@qmul.ac.uk:
   Implemented account model, user authentication, article model, articles ajax like, email notification, and relevant templates
 
