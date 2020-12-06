@@ -46,11 +46,11 @@
                       <div class="col-md-auto"><button type="button" id="new_comment_button" class="btn btn-outline-dark stat-item" data-id="">Add Comment</button></div>
                       <div class="col-md-auto"><a type="button" href="{% url 'news_home' %}" id="article-button" class="btn btn-outline-dark stat-item" data-id={{ news.id }}>Go back to News</a></div>
                   </div>
-                  </div> 
+                  </div>
                 </div>
               </div>
               <div class="post-footer">
-                <div class="new_comment_placeholder"></div> 
+                <div class="new_comment_placeholder"></div>
                   {% load mptt_tags %}
                 <!-- Comments -->
                 <div class="comments-list">
@@ -67,7 +67,7 @@
                       <div class="comment-heading comment_foot">
                         {% if node.level < 3%}
                           <button id="" class="button reply_comment_button" data-id="{{node.id}}" data-level="{{node.level}}"data-article="{{article.id}}">Reply</button>
-                        {% endif %} 
+                        {% endif %}
                         {% if node.account.username == user.username%}
                         | <button id="delete_comment" class="button" data-id="{{node.id}}" data-article="{{article.id}}">Delete</button>
                         | <button id="edit_comment" class="button" data-id="{{node.id}}" data-article="{{article.id}}">Edit</button>
@@ -83,11 +83,11 @@
                   </div>
                   <hr>
                     {% endrecursetree %}
-                    
-                  </div>   
+
+                  </div>
               </div>
                 <!-- END Comments -->
-            </div> 
+            </div>
           </div>
         </div>
       </div>
@@ -95,12 +95,12 @@
   </div>
 
   <script>
-  // Global variables for the .js script 
+  // Global variables for the .js script
   var CSRF_TOKEN = '{{ csrf_token }}'
   var ACCOUNT_PROFILE_PICTURE = "{{user.profile_picture.url}}"
-  var ACCOUNT_USERNAME = "{{user.username  | capfirst}}"  
+  var ACCOUNT_USERNAME = "{{user.username  | capfirst}}"
   var NUMBER_OF_COMMENTS = "{{ comments.count }}"
-  
+
   // Global Ajax endpoints
   var END_POINT_DELETE_COMMENT = "{% url 'delete comment' 0%}"
   var END_POINT_LIKE = "{% url 'like' 0 %}"

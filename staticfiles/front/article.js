@@ -1,4 +1,20 @@
 
+// If user scrolls a certain amount, display the "back to top button"
+$(document).on('scroll', function(){
+  if ($(document).scrollTop() > 200)
+  {
+    $('#top-button').css('display', "block")
+  }
+  else
+  {
+    $('#top-button').css('display', "none")
+  }
+});
+
+$(document).on('click', '#top-button', function(){
+  $(document).scrollTop(0)
+});
+
 // Like an article
 $(document).on('click', '#like-button', function(e){
   var articleID = $(this).data('id');
