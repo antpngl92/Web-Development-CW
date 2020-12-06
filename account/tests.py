@@ -13,11 +13,11 @@ class AccountTests(StaticLiveServerTestCase):
     def setUp(self):
         os_used = platform.system()
         if os_used == "Linux":
-            self.browser = webdriver.Chrome(executable_path='/opt/app-root/src/account/chromedriver_linux')
+            self.browser = webdriver.Chrome(executable_path='account/chromedriver_linux')
         elif os_used == "Windows":
-            self.browser = webdriver.Chrome(executable_path='/opt/app-root/src/account/chromedriver.exe')
+            self.browser = webdriver.Chrome(executable_path='account/chromedriver.exe')
         elif os_used == "Darwin":
-            self.browser = webdriver.Chrome(executable_path='/opt/app-root/src/account/chromedriver_mac')
+            self.browser = webdriver.Chrome(executable_path='account/chromedriver_mac')
 
         self.browser.get(self.live_server_url)
         self.browser.maximize_window()
