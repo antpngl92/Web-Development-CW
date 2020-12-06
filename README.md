@@ -32,6 +32,7 @@ Assuming you have conda installed:
 
 3) Install pip package: conda install pip
 
-4) install all the modules from the requirements.txt file by ```py pip install -r requirements.txt```
+4) install all the modules from the requirements.txt file by:
+ ``` pip install -r requirements.txt```
 
 
