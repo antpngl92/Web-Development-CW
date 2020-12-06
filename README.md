@@ -16,7 +16,7 @@ Test users:
 Deployed on: https://mygroup43-mygroup43.apps.okd.eecs.qmul.ac.uk/
 
 **Current Chromedriver is provided for Chrome - version 87.
-There is no need to download chrome driver as it is automatically picked for your OS  by te test scripts, unless, your chrome browser is different version**
+Unless your chrome browser is different version (not 87), there is no need to download it as it is automatically picked for your OS  by the test scripts**
 
 
 # Instructions: 
